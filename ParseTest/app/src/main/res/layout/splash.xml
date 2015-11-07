@@ -33,7 +33,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Icons made by Freepik,Zurb, Plainicon from www.flaticon.com is licensed by CC BY 3.0"
         android:id="@+id/textView5"
         android:gravity="center"
         android:layout_marginTop="10dp"
@@ -44,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/imageView"
-        android:src="@drawable/logo"
+        android:src="@drawable/logo_all_gedera_transperent"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/textView2" />

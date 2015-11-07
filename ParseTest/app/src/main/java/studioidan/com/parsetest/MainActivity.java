@@ -64,18 +64,19 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //TODO put this on splash: "Icons made by Freepik,Zurb, Plainicon from www.flaticon.com is licensed by CC BY 3.0"
         super.onCreate(savedInstanceState);
         forceRTLIfSupported();
+        // the new main activity
+        //setContentView(R.layout.activity_main1);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setTitle("יש כיוון");
+        getSupportActionBar().setTitle("כל גדרה");
         init();
         initArcMenu();
-        //createParseClassess();
+        createParseClassess();
 
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+       //AdView mAdView = (AdView) findViewById(R.id.adView);
+       // AdRequest adRequest = new AdRequest.Builder().build();
+       // mAdView.loadAd(adRequest);
 
         turnGpsOn();
     }
