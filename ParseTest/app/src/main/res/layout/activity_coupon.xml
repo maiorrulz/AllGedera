@@ -8,11 +8,17 @@
     tools:context="studioidan.com.parsetest.CouponActivity">
 
     <Button
+        android:id="@+id/button2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="הצג לי על מפה"
-        android:id="@+id/button2"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:onClick="openMap"/>
+
+    <ListView
+        android:id="@+id/couponsListView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/button2" />
 </RelativeLayout>
