@@ -1,21 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
 
     <ImageView
+        android:id="@+id/couponImage"
         android:layout_width="120dp"
         android:layout_height="80dp"
-        android:id="@+id/couponImage"
         android:src="@drawable/conference2"
+        android:layout_alignParentLeft="true"
          />
 
     <TextView
+        android:id="@+id/couponTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
-        android:id="@+id/couponTitle"
-        android:padding="5dp" />
+        android:padding="5dp"
+        android:layout_toRightOf="@+id/couponImage"
+        />
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/expireDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_toRightOf="@+id/couponTitle"/>
+
+</RelativeLayout>

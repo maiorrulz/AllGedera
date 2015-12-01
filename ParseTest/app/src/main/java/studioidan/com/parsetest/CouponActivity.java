@@ -14,7 +14,8 @@ public class CouponActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupon);
-        String[] coupons={"coup1","coup2","coup3"};
+        // coupons names could not contain '~' symbol!
+        String[] coupons={"coup1~22/1/2015","coup2~22/1/2015","coup3~22/1/2015"};
         ListAdapter listAdapter=
                new CustomAdapter(this,coupons);
         ListView couponsListView=(ListView) findViewById(R.id.couponsListView);
