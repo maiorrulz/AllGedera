@@ -8,6 +8,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import java.util.List;
+
+import entities.GenericEvent;
+import entities.fakeEventsOrCoupons;
+
 public class CouponActivity extends AppCompatActivity {
 
     @Override
@@ -15,9 +20,19 @@ public class CouponActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupon);
         // coupons names could not contain '~' symbol!
-        String[] coupons={"coup1~22/1/2015","coup2~22/1/2015","coup3~22/1/2015"};
+        List<GenericEvent> genericEvents= fakeEventsOrCoupons.getFakeEvents();
+        int numOfCoupons=genericEvents.size();
+        String[] coupons=new String[numOfCoupons];
+        for(int i=0;i<numOfCoupons;i++){
+            GenericEvent ge=fakeEventsOrCoupons.getFakeEvents().get(i);
+            coupons[i]=ge.getName()+
+                    "~"+ge.getPhone();
+                  //  "~"+ge.getImage();
+        }
+
         ListAdapter listAdapter=
                new CustomAdapter(this,coupons);
+        Splash.writeToFile("here1");
         ListView couponsListView=(ListView) findViewById(R.id.couponsListView);
         couponsListView.setAdapter(listAdapter);
     }

@@ -12,17 +12,16 @@ import com.parse.SaveCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import entities.GenericEvent;
 import entities.Msg;
 import entities.Place;
 import entities.Work;
 
-/**
- * Created by PopApp_laptop on 14/05/2015.
- */
 public class App extends Application {
     private static App _instance;
     public static List<Place> places;
     public static List<Work> works;
+    public static List<GenericEvent> genericEvents;
     public static List<String> cities;
     public static List<Msg> msgs;
     /*public static App get_instance()
@@ -42,6 +41,7 @@ public class App extends Application {
         ParseObject.registerSubclass(Place.class);
         ParseObject.registerSubclass(Work.class);
         ParseObject.registerSubclass(Msg.class);
+        ParseObject.registerSubclass(GenericEvent.class);
         //Parse.initialize(this, "GqYD4PRVVZnVwMo0B2PWJazBY4frgVxU5EJt0Sft", "fNpOu5TeIhaNUcQs0cVGaurjMFQqoWC2hcZxmkJ6");  // me
         Parse.initialize(this, "1gOrgDgD5Wk615TD4vsZBrzI4z5m3El7Ua84cHeX", "qtUAWSNq0fGxXh4N3jljU1RroYeuGb0MQLzCn30U");
 
@@ -62,5 +62,6 @@ public class App extends Application {
         places = new ArrayList<Place>();
         works = new ArrayList<Work>();
         msgs = new ArrayList<Msg>();
+        genericEvents = new ArrayList<GenericEvent>();
     }
 }

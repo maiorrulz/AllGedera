@@ -26,32 +26,21 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_alignParentLeft="true"
-                android:layout_above="@+id/adView" />
+                />
 
             <satellite.SatelliteMenu
                 android:id="@+id/menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|left"
                 sat:closeOnClick="true"
                 sat:expandDuration="500"
                 sat:mainImage="@drawable/img_arc_menu"
                 sat:satelliteDistance="170dp"
                 sat:totalSpacingDegree="90"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="false"
-                android:layout_above="@+id/adView" />
-
-            <com.google.android.gms.ads.AdView
-                android:id="@+id/adView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
                 android:layout_alignParentBottom="true"
-                ads:adSize="BANNER"
-                ads:adUnitId="@string/banner_ad_unit_id"
-                android:layout_gravity="center_horizontal|bottom">
-            </com.google.android.gms.ads.AdView>
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="false" />
+
         </RelativeLayout>
 
     </FrameLayout>

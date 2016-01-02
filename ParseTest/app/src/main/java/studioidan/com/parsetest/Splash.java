@@ -3,6 +3,7 @@ package studioidan.com.parsetest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.os.Handler;
 
 import org.json.JSONArray;
@@ -16,9 +17,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
@@ -27,16 +30,25 @@ import com.studioidan.popapplibrary.CPM;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import entities.GenericEvent;
 import entities.Keys;
 import entities.Msg;
 import entities.Place;
 import entities.Work;
+import entities.fakeEventsOrCoupons;
 
 
 public class Splash extends Activity {
@@ -57,6 +69,7 @@ public class Splash extends Activity {
 
     private void LoadData() {
         getWorks();
+        getGenericEvents();
         getPlaces();
         getCities();
         getMsgs();
@@ -119,6 +132,7 @@ public class Splash extends Activity {
         });
     }
     public void getWorks() {
+
         //allWorkPlaces = new ArrayList<Work>();
         ParseQuery<Work> query = new ParseQuery<Work>("Work");
         query.findInBackground(new FindCallback<Work>() {
@@ -128,6 +142,7 @@ public class Splash extends Activity {
                     //for (Work w : list)
                     //allWorkPlaces.add(w);
                     Log.i(tag, "got " + list.size() + " Works!");
+                   // writeToFile(list.get(1).toString());
                     App.works=list;
 
                     proccess+=1;
@@ -135,6 +150,98 @@ public class Splash extends Activity {
             }
 
         });
+    }
+    public void getGenericEvents() {
+
+        ParseQuery<GenericEvent> query = new ParseQuery<GenericEvent>("GenericEvent");
+        query.findInBackground(new FindCallback<GenericEvent>() {
+            @Override
+            public void done(List<GenericEvent> list, ParseException e) {
+                if (e == null) {
+                    //for (Work w : list)
+                    //allWorkPlaces.add(w);
+                    Log.i(tag, "got " + list.size() + " Works!");
+                  //  writeToFile(list.get(1).toString());
+                    App.genericEvents=new ArrayList<GenericEvent>();
+
+                    for (int i=0;i<fakeEventsOrCoupons.getFakeEvents().size();i++)
+                        //matan : should be deep copy
+                    App.genericEvents.add(fakeEventsOrCoupons.getFakeEvents().get(i));
+                    proccess+=1;
+                }
+            }
+
+        });
+
+    }
+
+    static File gpxfile=null;
+    static FileWriter gpxwriter=null;
+    static BufferedWriter out=null;
+    public static void writeToFile(String data) {
+        try {
+            File root = Environment.getExternalStorageDirectory();
+            if (root.canWrite()){
+                gpxfile = new File(root, "matan_debug.txt");
+                gpxwriter = new FileWriter(gpxfile);
+                BufferedWriter out = new BufferedWriter(gpxwriter);
+                out.write(data);
+                out.close();
+            }
+        } catch (IOException e) {
+            Log.e("Exception", "Could not write file " + e.getMessage());
+        }
+    }
+    public static void writeToFile1(String data) {
+        try {
+            File root = Environment.getExternalStorageDirectory();
+            if (root.canWrite()){
+                gpxfile = new File(root, "matan_debug1.txt");
+                gpxwriter = new FileWriter(gpxfile);
+                BufferedWriter out = new BufferedWriter(gpxwriter);
+                out.write(data);
+                out.close();
+            }
+        } catch (IOException e) {
+            Log.e("Exception", "Could not write file " + e.getMessage());
+        }
+    }
+    public static void writeToFile2(String data) {
+        try {
+            File root = Environment.getExternalStorageDirectory();
+            if (root.canWrite()){
+                gpxfile = new File(root, "matan_debug2.txt");
+                gpxwriter = new FileWriter(gpxfile);
+                BufferedWriter out = new BufferedWriter(gpxwriter);
+                out.write(data);
+                out.close();
+            }
+        } catch (IOException e) {
+            Log.e("Exception", "Could not write file " + e.getMessage());
+        }
+    }
+    public static void writeToFile3(String data) {
+        try {
+            File root = Environment.getExternalStorageDirectory();
+            if (root.canWrite()){
+                gpxfile = new File(root, "matan_debug3.txt");
+                gpxwriter = new FileWriter(gpxfile);
+                BufferedWriter out = new BufferedWriter(gpxwriter);
+                out.write(data);
+                out.close();
+            }
+        } catch (IOException e) {
+            Log.e("Exception", "Could not write file " + e.getMessage());
+        }
+    }
+
+
+    public static void closeOut() {
+        try {
+            out.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public void getCities() {
         JSONObject jsonObj = null;

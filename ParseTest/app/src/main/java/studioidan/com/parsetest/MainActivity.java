@@ -41,6 +41,7 @@ import fragments.FragmentDialogContactUs;
 import fragments.FragmentDialogRegister;
 import fragments.FragmentDialog_Msg;
 import fragments.Fragment_Main_Content;
+
 import satellite.SatelliteMenu;
 import satellite.SatelliteMenuItem;
 
@@ -65,6 +66,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+      //  DataAccessServer das = DataAccessServer.getInstance();
+       // List<Event> listEvent = das.getAllEvent();
+
         forceRTLIfSupported();
         // the new main activity
         //setContentView(R.layout.activity_main1);
@@ -132,22 +137,23 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private void initArcMenu() {
         SatelliteMenu menu = (SatelliteMenu) findViewById(R.id.menu);
         List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
-        items.add(new SatelliteMenuItem(3, R.drawable.img_arc_register));
-        items.add(new SatelliteMenuItem(2, R.drawable.img_arc_party));
+       // items.add(new SatelliteMenuItem(3, R.drawable.img_arc_register));
+        //items.add(new SatelliteMenuItem(2, R.drawable.img_arc_party));
         items.add(new SatelliteMenuItem(1, R.drawable.img_arc_work));
 
         menu.addItems(items);
         menu.setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
             public void eventOccured(int id) {
                 if (id == 1) {
-                    Toast.makeText(MainActivity.this, "מקומות עבודה", Toast.LENGTH_SHORT).show();
-                    fr_main_content.SetWorks(App.works);
-                } else if (id == 2) {
+                    Toast.makeText(MainActivity.this, "תרבות", Toast.LENGTH_SHORT).show();
+                    fr_main_content.SetGenericEvents(App.genericEvents);
+                } else if (id == 2) {/*
                     Toast.makeText(MainActivity.this, "בארים", Toast.LENGTH_SHORT).show();
-                    fr_main_content.SetPlaces(App.places);
-                } else if (id == 3) {
+                    fr_main_content.SetPlaces(App.places);*/
+                } else if (id == 3) {/*
                     onItemClick(null, null, 3, 0);
                     Toast.makeText(MainActivity.this, "הרשמה לקבלת עבודה", Toast.LENGTH_SHORT).show();
+                    */
                 }
             }
         });
@@ -163,11 +169,11 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         fr_main_content = (Fragment_Main_Content) getSupportFragmentManager().findFragmentById(R.id.fragment);
 
         adapter = new AdapterMenuItem(MainActivity.this, new ArrayList<MenuDrawerItem>());
-        adapter.data.add(new MenuDrawerItem("עבודות", R.drawable.img_menu_work));
-        adapter.data.add(new MenuDrawerItem("בארים", R.drawable.img_menu_party));
-        adapter.data.add(new MenuDrawerItem("לוח יחצנים", R.drawable.img_menu_party_managers));
-        adapter.data.add(new MenuDrawerItem("הרשמה לקבלת עבודה", R.drawable.img_register_to_get_job));
-        adapter.data.add(new MenuDrawerItem("צור קשר", R.drawable.img_menu_contact_us));
+        adapter.data.add(new MenuDrawerItem("אירועי תרבות", R.drawable.img_menu_work));
+        //adapter.data.add(new MenuDrawerItem("בארים", R.drawable.img_menu_party));
+        //adapter.data.add(new MenuDrawerItem("לוח יחצנים", R.drawable.img_menu_party_managers));
+        //adapter.data.add(new MenuDrawerItem("הרשמה לקבלת עבודה", R.drawable.img_register_to_get_job));
+        //adapter.data.add(new MenuDrawerItem("צור קשר", R.drawable.img_menu_contact_us));
 
         //drawerMenu
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -220,7 +226,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if (i == 0) {
-            fr_main_content.SetWorks(App.works);
+            fr_main_content.SetGenericEvents(App.genericEvents);
         } else if (i == 1) { // bars]
             fr_main_content.SetPlaces(App.places);
         } else if (i == 2) {

@@ -4,6 +4,10 @@ android {
     compileSdkVersion 22
     buildToolsVersion "21.1.2"
 
+    repositories {
+        mavenCentral()
+    }
+
     defaultConfig {
         applicationId "studioidan.com.parsetest"
         minSdkVersion 15
@@ -29,4 +33,5 @@ dependencies {
     compile 'com.github.rey5137:material:1.1.1'
     compile project(":popapplibrary")
     compile 'com.google.android.gms:play-services-ads:7.5.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.7.0'
 }

@@ -40,9 +40,11 @@ import com.parse.ParseImageView;
 import java.util.HashMap;
 import java.util.List;
 
+import entities.GenericEvent;
 import entities.Place;
 import entities.Work;
 import studioidan.com.parsetest.R;
+import studioidan.com.parsetest.Splash;
 
 /**
  * Created by PopApp_laptop on 18/05/2015.
@@ -52,8 +54,10 @@ public class Fragment_Main_Content extends Fragment {
     private GoogleMap map;
     List<Place> allPlaces;
     List<Work> allWorks;
+    List<GenericEvent> allGenericEvents;
     HashMap<Marker, Place> mapPlaces = new HashMap<Marker, Place>();
     HashMap<Marker, Work> mapWorks = new HashMap<Marker, Work>();
+    HashMap<Marker, GenericEvent> mapGenericEvents = new HashMap<Marker, GenericEvent>();
     public String shown = "";
     public boolean gotLocation = false;
 
@@ -64,7 +68,7 @@ public class Fragment_Main_Content extends Fragment {
         map = getMapFragment().getMap();
         map.setInfoWindowAdapter(infoWindowAdapter);
         map.setMyLocationEnabled(true);
-        map.getUiSettings().setZoomControlsEnabled(true);
+        map.getUiSettings().setZoomControlsEnabled(false);
         goToMyLocation();
         return v;
     }
@@ -85,6 +89,7 @@ public class Fragment_Main_Content extends Fragment {
         }
         return (SupportMapFragment) fm.findFragmentById(R.id.map);
     }
+
     private void goToMyLocation() {
         // Get LocationManager object from System Service LOCATION_SERVICE
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -126,7 +131,6 @@ public class Fragment_Main_Content extends Fragment {
 
     public void SetWorks(List<Work> works) {
         shown = Work.class.getSimpleName();
-
         allWorks = works;
         map.clear();
         mapPlaces.clear();
@@ -142,6 +146,28 @@ public class Fragment_Main_Content extends Fragment {
             //.icon(BitmapDescriptorFactory.fromResource(R.drawable.img_pin))
             Marker m = map.addMarker(op);
             mapWorks.put(m, w);
+        }
+    }
+
+    public void SetGenericEvents(List<GenericEvent> genericEvents) {
+
+        shown = GenericEvent.class.getSimpleName();
+       // Splash.writeToFile(shown.toString());
+        allGenericEvents = genericEvents;
+        map.clear();
+        mapPlaces.clear();
+        map.setOnInfoWindowClickListener(onInfoWindowClickListenerGenericEvent);
+        for (GenericEvent g : genericEvents) {
+            LatLng latLng = new LatLng(g.getLocation().getLatitude(), g.getLocation().getLongitude());
+            String name = g.getName();
+            String address = g.getAddress();
+            MarkerOptions op = new MarkerOptions()
+                    .position(latLng)
+                    .title(name)
+                    .snippet(address + "\n" + getActivity().getResources().getString(R.string.press_to_see_more));
+            //.icon(BitmapDescriptorFactory.fromResource(R.drawable.img_pin))
+            Marker m = map.addMarker(op);
+            mapGenericEvents.put(m, g);
         }
     }
 
@@ -163,13 +189,30 @@ public class Fragment_Main_Content extends Fragment {
         public void onInfoWindowClick(Marker marker) {
             Log.i(tag, "info clicked");
             Work work = mapWorks.get(marker);
-                FragmentDialogWorks fragmentDialogWorks = new FragmentDialogWorks();
-                Bundle bundle = new Bundle();
-                bundle.putSerializable("work",work);
-                fragmentDialogWorks.setArguments(bundle);
-                fragmentDialogWorks.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-                fragmentDialogWorks.show(getActivity().getSupportFragmentManager(), "work");
+            FragmentDialogWorks fragmentDialogWorks = new FragmentDialogWorks();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("work",work);
+            fragmentDialogWorks.setArguments(bundle);
+            fragmentDialogWorks.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+            fragmentDialogWorks.show(getActivity().getSupportFragmentManager(), "work");
         }
+    };
+
+    GoogleMap.OnInfoWindowClickListener onInfoWindowClickListenerGenericEvent = new GoogleMap.OnInfoWindowClickListener() {
+        @Override
+        public void onInfoWindowClick(Marker marker) {
+
+          //  Log.i(tag, "info clicked");
+          //
+            //GenericEvent ge = mapGenericEvents.get(marker);
+            //FragmentDialogGenericEvents fragmentDialogGenericEvents = new FragmentDialogGenericEvents();
+            //Bundle bundle = new Bundle();
+            //bundle.putSerializable("genericEvent",ge);
+           // fragmentDialogGenericEvents.setArguments(bundle);
+          //  fragmentDialogGenericEvents.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+        //    fragmentDialogGenericEvents.show(getActivity().getSupportFragmentManager(), "genericEvent");
+      //
+       }
     };
 
     GoogleMap.InfoWindowAdapter infoWindowAdapter = new GoogleMap.InfoWindowAdapter() {
@@ -188,7 +231,12 @@ public class Fragment_Main_Content extends Fragment {
                 Work w = mapWorks.get(marker);
                 tvName.setText(w.getName());
                 tvAddress.setText(w.getAddress());
-            } else {
+            } else if(shown.equals((GenericEvent.class.getSimpleName()))) {
+                GenericEvent ge = mapGenericEvents.get(marker);
+                tvName.setText(ge.getName());
+                tvAddress.setText(ge.getAddress());
+            }
+            else{
                 Place p = mapPlaces.get(marker);
                 tvName.setText(p.getName());
                 tvAddress.setText(p.getAddress());
