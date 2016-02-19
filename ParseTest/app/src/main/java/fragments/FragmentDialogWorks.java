@@ -18,7 +18,6 @@ import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseImageView;
 
-import entities.Place;
 import entities.Work;
 import studioidan.com.parsetest.R;
 
@@ -42,7 +41,7 @@ public class FragmentDialogWorks extends DialogFragment implements View.OnClickL
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_dialog_work, container, false);
+        View v = inflater.inflate(R.layout.fragment_dialog_business, container, false);
         imgExit = (ImageView) v.findViewById(R.id.img_exit);
         imgExit.setOnClickListener(this);
 
@@ -55,18 +54,18 @@ public class FragmentDialogWorks extends DialogFragment implements View.OnClickL
         TextView tvAbout = ((TextView) v.findViewById(R.id.tv_fragment_work_addess));
         if (work.getAbout() != null)
             tvAbout.setText(work.getAbout());
-        TextView tvPay = ((TextView) v.findViewById(R.id.tv_fragment_work_pay));
-        if (work.getPay() != null)
-            tvPay.setText(work.getPay());
+        //TextView tvPay = ((TextView) v.findViewById(R.id.tv_fragment_work_pay));
+        //if (work.getPay() != null)
+        //    tvPay.setText(work.getPay());
         TextView tvPhone = ((TextView) v.findViewById(R.id.tv_fragment_work_phone));
         if (work.getPhone() != null)
             tvPhone.setText(work.getPhone());
-        btnNav = (Button) v.findViewById(R.id.btn_fragment_work_nav);
+        btnNav = (Button) v.findViewById(R.id.btn_fragment_business_nav);
         btnNav.setOnClickListener(this);
 
-        final ParseImageView imageView = (ParseImageView) v.findViewById(R.id.img_fragment_work_image);
+        //final ParseImageView imageView = (ParseImageView) v.findViewById(R.id.img_fragment_work_image);
         ParseFile img = work.getImage();
-        if (img != null) {
+        /*if (img != null) {
             String url = img.getUrl();
             // UrlImageViewHelper.setUrlDrawable(imageView,url);
             imageView.setParseFile(img);
@@ -77,7 +76,7 @@ public class FragmentDialogWorks extends DialogFragment implements View.OnClickL
                     imageView.setImageBitmap(bmp);
                 }
             });
-        }
+        }*/
         return v;
     }
 

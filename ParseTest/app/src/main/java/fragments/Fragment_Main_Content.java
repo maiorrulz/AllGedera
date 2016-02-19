@@ -1,48 +1,39 @@
 package fragments;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
-import android.provider.SyncStateContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v7.internal.view.ContextThemeWrapper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.koushikdutta.urlimageviewhelper.UrlImageViewHelper;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
-import com.parse.ParseImageView;
+import com.google.android.gms.maps.model.Polyline;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import entities.GenericEvent;
 import entities.Place;
 import entities.Work;
+import studioidan.com.parsetest.App;
 import studioidan.com.parsetest.R;
 import studioidan.com.parsetest.Splash;
 
@@ -51,13 +42,15 @@ import studioidan.com.parsetest.Splash;
  */
 public class Fragment_Main_Content extends Fragment {
     private String tag = "Fragment Main Content";
-    private GoogleMap map;
+    public static GoogleMap map;
+    public static Location myLocation = null;
+    public static Polyline currentPath = null;
     List<Place> allPlaces;
     List<Work> allWorks;
     List<GenericEvent> allGenericEvents;
     HashMap<Marker, Place> mapPlaces = new HashMap<Marker, Place>();
     HashMap<Marker, Work> mapWorks = new HashMap<Marker, Work>();
-    HashMap<Marker, GenericEvent> mapGenericEvents = new HashMap<Marker, GenericEvent>();
+    HashMap<Marker, GenericEvent> mapBusinesses = new HashMap<Marker, GenericEvent>();
     public String shown = "";
     public boolean gotLocation = false;
 
@@ -70,6 +63,17 @@ public class Fragment_Main_Content extends Fragment {
         map.setMyLocationEnabled(true);
         map.getUiSettings().setZoomControlsEnabled(false);
         goToMyLocation();
+        /*map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                marker.showInfoWindow();
+                map.moveCamera(CameraUpdateFactory.newLatLng(marker.getPosition()));
+                map.animateCamera(CameraUpdateFactory.zoomTo(14));
+                Log.d("", "in marker click listener");
+                Log.i("", "in marker Click listener");
+                return true;
+            }
+        });*/
         return v;
     }
 
@@ -105,6 +109,7 @@ public class Fragment_Main_Content extends Fragment {
             LatLng latLng = new LatLng(latitude, longitude);
             map.moveCamera(CameraUpdateFactory.newLatLng(latLng));
             map.animateCamera(CameraUpdateFactory.zoomTo(14));
+            this.myLocation = myLocation;
         }
     }
 
@@ -149,14 +154,35 @@ public class Fragment_Main_Content extends Fragment {
         }
     }
 
-    public void SetGenericEvents(List<GenericEvent> genericEvents) {
+    public void putBusinessesOnMap() {
+        Splash.loadGenericEvents();
+        List<GenericEvent> businesses=App.genericEvents;
+        Log.w("matanMsg","put businesses on map. businesses.size()="+businesses.size());
 
-        shown = GenericEvent.class.getSimpleName();
-       // Splash.writeToFile(shown.toString());
-        allGenericEvents = genericEvents;
         map.clear();
         mapPlaces.clear();
-        map.setOnInfoWindowClickListener(onInfoWindowClickListenerGenericEvent);
+        for (GenericEvent business : businesses) {
+            Marker newBusinessMarker = map.addMarker(new MarkerOptions()
+                                                    .position(new LatLng(business.getLocation().getLatitude(),
+                                                                         business.getLocation().getLongitude()))
+                                                    .title(business.getName())
+                                                    .snippet(business.getAbout()));
+            //newBusinessMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.business_info_icon));
+            mapBusinesses.put(newBusinessMarker, business);
+        }
+        map.setOnInfoWindowClickListener(onBusinessInfoWindowClickListener);
+        this.shown = GenericEvent.class.getSimpleName();
+
+    }
+
+    public void SetGenericEvents(List<GenericEvent> genericEvents) {
+
+        //shown = GenericEvent.class.getSimpleName();
+       // Splash.writeToFile(shown.toString());
+        //allGenericEvents = genericEvents;
+        map.clear();
+        mapPlaces.clear();
+        map.setOnInfoWindowClickListener(onBusinessInfoWindowClickListener);
         for (GenericEvent g : genericEvents) {
             LatLng latLng = new LatLng(g.getLocation().getLatitude(), g.getLocation().getLongitude());
             String name = g.getName();
@@ -167,7 +193,7 @@ public class Fragment_Main_Content extends Fragment {
                     .snippet(address + "\n" + getActivity().getResources().getString(R.string.press_to_see_more));
             //.icon(BitmapDescriptorFactory.fromResource(R.drawable.img_pin))
             Marker m = map.addMarker(op);
-            mapGenericEvents.put(m, g);
+            mapBusinesses.put(m, g);
         }
     }
 
@@ -198,19 +224,20 @@ public class Fragment_Main_Content extends Fragment {
         }
     };
 
-    GoogleMap.OnInfoWindowClickListener onInfoWindowClickListenerGenericEvent = new GoogleMap.OnInfoWindowClickListener() {
+    GoogleMap.OnInfoWindowClickListener onBusinessInfoWindowClickListener = new GoogleMap.OnInfoWindowClickListener() {
         @Override
         public void onInfoWindowClick(Marker marker) {
 
           //  Log.i(tag, "info clicked");
           //
-            //GenericEvent ge = mapGenericEvents.get(marker);
-            //FragmentDialogGenericEvents fragmentDialogGenericEvents = new FragmentDialogGenericEvents();
-            //Bundle bundle = new Bundle();
-            //bundle.putSerializable("genericEvent",ge);
-           // fragmentDialogGenericEvents.setArguments(bundle);
-          //  fragmentDialogGenericEvents.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-        //    fragmentDialogGenericEvents.show(getActivity().getSupportFragmentManager(), "genericEvent");
+            GenericEvent ge = mapBusinesses.get(marker);
+            FragmentDialogBusiness fragmentDialogBusiness = new FragmentDialogBusiness();
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("genericEvent",ge);
+            //bundle.putSerializable("myLocation", (Serializable) myLocation);
+            fragmentDialogBusiness.setArguments(bundle);
+            fragmentDialogBusiness.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
+            fragmentDialogBusiness.show(getActivity().getSupportFragmentManager(), "genericEvent");
       //
        }
     };
@@ -232,7 +259,7 @@ public class Fragment_Main_Content extends Fragment {
                 tvName.setText(w.getName());
                 tvAddress.setText(w.getAddress());
             } else if(shown.equals((GenericEvent.class.getSimpleName()))) {
-                GenericEvent ge = mapGenericEvents.get(marker);
+                GenericEvent ge = mapBusinesses.get(marker);
                 tvName.setText(ge.getName());
                 tvAddress.setText(ge.getAddress());
             }

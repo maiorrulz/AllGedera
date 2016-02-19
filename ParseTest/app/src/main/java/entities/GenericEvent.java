@@ -15,7 +15,7 @@ public class GenericEvent extends ParseObject implements Serializable{
     public void setName(String name){put("name",name);};
 
     public String getAbout(){return getString("about");};
-    public void setAbbout(String about){put("about", about);};
+    public void setAbout(String about){put("about", about);};
 
     public String getPay(){return getString("pay");};
     public void setPay(String pay){put("pay", pay);};
@@ -35,8 +35,10 @@ public class GenericEvent extends ParseObject implements Serializable{
     public String getArea(){return getString("area");};
     public void setArea(String area){put("area", area);};
 
-    public ParseFile getImage(){return getParseFile("image");};
-    public void setImage(ParseFile image){put("image", image);};
+    //public ParseFile getImage(){return getParseFile("image");};
+    //public void setImage(ParseFile image){put("image", image);};
+    public int getImage(){return getInt("image");};
+    public void setImage(int image){put("image", image);};
 
     @Override
     public String toString() {

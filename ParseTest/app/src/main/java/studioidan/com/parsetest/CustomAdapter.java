@@ -25,16 +25,27 @@ import android.widget.TextView;
 
         // the idea is to put "LargeText,date,LargeText..."
         String singleRow=getItem(position);
+
         String singleText = singleRow.substring(0, singleRow.indexOf("~"));
-        singleRow=singleRow.substring(singleRow.indexOf("~")+1);
-        String singleText_phone = singleRow;
-        //int im=Integer.parseInt(singleRow.substring(singleRow.indexOf("~")+1));
+
+        singleRow = singleRow.substring(singleRow.indexOf("~")+1);
+
+        String singleText_about = singleRow.substring(0, singleRow.indexOf("~"));
+
+        int im=Integer.parseInt(singleRow.substring(singleRow.indexOf("~")+1));
+
         TextView couponText = (TextView) customView.findViewById(R.id.couponTitle);
+
         TextView couponText_date = (TextView) customView.findViewById(R.id.expireDate);
+
         ImageView couponImage = (ImageView) customView.findViewById(R.id.couponImage);
+
         couponText.setText(singleText);
-        couponText_date.setText(singleText_phone);
-        couponImage.setImageResource(R.drawable.im1);
+
+        couponText_date.setText(singleText_about);
+
+        couponImage.setImageResource(im);
+
         return customView;
     }
 }

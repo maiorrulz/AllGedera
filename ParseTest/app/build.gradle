@@ -9,11 +9,13 @@ android {
     }
 
     defaultConfig {
+        testApplicationId "com.test"
         applicationId "studioidan.com.parsetest"
         minSdkVersion 15
         targetSdkVersion 22
         versionCode 4
         versionName "1.4"
+
     }
     buildTypes {
         release {
@@ -31,7 +33,7 @@ dependencies {
     compile 'com.google.android.gms:play-services:7.5.0'
     compile files('libs/urlimageviewhelper.jar')
     compile 'com.github.rey5137:material:1.1.1'
-    compile project(":popapplibrary")
+    compile project(':popapplibrary')
     compile 'com.google.android.gms:play-services-ads:7.5.0'
     compile 'com.facebook.android:facebook-android-sdk:4.7.0'
 }

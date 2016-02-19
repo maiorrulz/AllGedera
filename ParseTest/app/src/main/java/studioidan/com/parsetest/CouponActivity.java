@@ -24,10 +24,10 @@ public class CouponActivity extends AppCompatActivity {
         int numOfCoupons=genericEvents.size();
         String[] coupons=new String[numOfCoupons];
         for(int i=0;i<numOfCoupons;i++){
-            GenericEvent ge=fakeEventsOrCoupons.getFakeEvents().get(i);
-            coupons[i]=ge.getName()+
-                    "~"+ge.getPhone();
-                  //  "~"+ge.getImage();
+            GenericEvent ge = fakeEventsOrCoupons.getFakeEvents().get(i);
+            coupons[i]=ge.getName() +
+                    "~"+ge.getAbout() +
+                    "~"+ge.getImage();
         }
 
         ListAdapter listAdapter=

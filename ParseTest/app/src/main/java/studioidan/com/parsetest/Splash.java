@@ -68,11 +68,11 @@ public class Splash extends Activity {
     }
 
     private void LoadData() {
-        getWorks();
-        getGenericEvents();
+       // getWorks();
+        loadGenericEvents();
         getPlaces();
-        getCities();
-        getMsgs();
+      //  getCities();
+      //  getMsgs();
 
         isFinished = true;
     }
@@ -118,6 +118,8 @@ public class Splash extends Activity {
             }
         });
     }
+
+    /*
     public void getMsgs() {
         ParseQuery<Msg> query = new ParseQuery<Msg>("Msg");
         query.findInBackground(new FindCallback<Msg>() {
@@ -151,29 +153,14 @@ public class Splash extends Activity {
 
         });
     }
-    public void getGenericEvents() {
-
-        ParseQuery<GenericEvent> query = new ParseQuery<GenericEvent>("GenericEvent");
-        query.findInBackground(new FindCallback<GenericEvent>() {
-            @Override
-            public void done(List<GenericEvent> list, ParseException e) {
-                if (e == null) {
-                    //for (Work w : list)
-                    //allWorkPlaces.add(w);
-                    Log.i(tag, "got " + list.size() + " Works!");
-                  //  writeToFile(list.get(1).toString());
-                    App.genericEvents=new ArrayList<GenericEvent>();
-
-                    for (int i=0;i<fakeEventsOrCoupons.getFakeEvents().size();i++)
-                        //matan : should be deep copy
-                    App.genericEvents.add(fakeEventsOrCoupons.getFakeEvents().get(i));
-                    proccess+=1;
-                }
-            }
-
-        });
+*/
+    public static void loadGenericEvents() {
+        App.genericEvents =new ArrayList<GenericEvent>();
+        for (int i = 0; i < fakeEventsOrCoupons.getFakeEvents().size(); i++)
+            App.genericEvents.add(fakeEventsOrCoupons.getFakeEvents().get(i));
 
     }
+
 
     static File gpxfile=null;
     static FileWriter gpxwriter=null;
@@ -243,6 +230,7 @@ public class Splash extends Activity {
             e.printStackTrace();
         }
     }
+    /*
     public void getCities() {
         JSONObject jsonObj = null;
         String xml = loadAssetTextAsString(this, "cities.xml");
@@ -301,4 +289,5 @@ public class Splash extends Activity {
 
         return null;
     }
+    */
 }

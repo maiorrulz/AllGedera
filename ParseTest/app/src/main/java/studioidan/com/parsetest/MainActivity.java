@@ -72,6 +72,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
         forceRTLIfSupported();
         // the new main activity
+
         //setContentView(R.layout.activity_main1);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle("כל גדרה");
@@ -145,8 +146,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         menu.setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
             public void eventOccured(int id) {
                 if (id == 1) {
-                    Toast.makeText(MainActivity.this, "תרבות", Toast.LENGTH_SHORT).show();
-                    fr_main_content.SetGenericEvents(App.genericEvents);
+                    Toast.makeText(MainActivity.this, "עסקים", Toast.LENGTH_SHORT).show();
+                    //fr_main_content.SetGenericEvents(App.genericEvents);
+                    fr_main_content.putBusinessesOnMap();
                 } else if (id == 2) {/*
                     Toast.makeText(MainActivity.this, "בארים", Toast.LENGTH_SHORT).show();
                     fr_main_content.SetPlaces(App.places);*/
@@ -169,7 +171,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         fr_main_content = (Fragment_Main_Content) getSupportFragmentManager().findFragmentById(R.id.fragment);
 
         adapter = new AdapterMenuItem(MainActivity.this, new ArrayList<MenuDrawerItem>());
-        adapter.data.add(new MenuDrawerItem("אירועי תרבות", R.drawable.img_menu_work));
+        adapter.data.add(new MenuDrawerItem("עסקים", R.drawable.img_menu_work));
         //adapter.data.add(new MenuDrawerItem("בארים", R.drawable.img_menu_party));
         //adapter.data.add(new MenuDrawerItem("לוח יחצנים", R.drawable.img_menu_party_managers));
         //adapter.data.add(new MenuDrawerItem("הרשמה לקבלת עבודה", R.drawable.img_register_to_get_job));
@@ -227,8 +229,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         if (i == 0) {
             fr_main_content.SetGenericEvents(App.genericEvents);
-        } else if (i == 1) { // bars]
-            fr_main_content.SetPlaces(App.places);
+        } else if (i == 1) {
+            //fr_main_content.SetPlaces(App.places);
         } else if (i == 2) {
             FragmentDialog_Msg fragmentDialog_msg = new FragmentDialog_Msg();
             fragmentDialog_msg.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
