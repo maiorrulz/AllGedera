@@ -11,6 +11,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Logger;
 
@@ -24,8 +26,15 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
     private RequestQueue rQueue;
     private Map<String, String> properties;
 
+    private static List<Event> m_FakeEventList = new ArrayList<Event>();
+
     private RestAccessLayer() {
     };
+
+    public static List<Event> GetFakeEventList()
+    {
+        return m_FakeEventList;
+    }
 
     public static RestAccessLayer getInstance(Context context, String pathToConfigFile) throws IOException {
         if (dataAccess == null) {
@@ -42,7 +51,6 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
                     }
                     dataAccess.rQueue =Volley.newRequestQueue(context);
 
-
                     PropertiesInitilizator pi = new PropertiesInitilizator(pathToConfigFile);
                     dataAccess.properties = pi.initPropertyInfo();
                     if(dataAccess.properties == null) {
@@ -50,29 +58,32 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
                         throw new IOException("Failed to init properties from file " + pathToConfigFile);
                     }
 
+                    //if you want just normal string format data then use it
+                    //dataAccess.runGetRequest();
+
+                    //for jason data - use it (custom format i guess)
+                    dataAccess.runJsonRequestGetEvent();
                 }
             }
         }
         return dataAccess;
     }
 
-
-
-
-    public void runGetRequest() {
+    public void runGetRequest()
+    {
         String url = "http://109.65.202.30:8081/gadera/restapi/events";
         Logger.getAnonymousLogger().info("**********start***************");
+
         // Request a string response
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
 
-                        // Result handling
-                        System.out.println(response.substring(0,100));
+                // Result handling
+                System.out.println(response.substring(0,100));
 
-                    }
-                }, new Response.ErrorListener() {
+            }
+        }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
 
@@ -82,11 +93,12 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
             }
         });
 
-// Add the request to the queue
+        // Add the request to the queue
         rQueue.add(stringRequest);
     }
 
-    public void runJsonRequestGetEvent(final RestCallback.OnResponseSuccess ors) throws IOException {
+    public void runJsonRequestGetEvent() throws IOException
+    {
         String url = properties.get("ip") + properties.get("restApiPath") + "/" + properties.get("eventPath");
 
         final Request jsonRequest = new GsonRequest<Event[]> (Request.Method.GET,url, Event[].class, new Response.Listener<Event[]>(){
@@ -94,14 +106,16 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
             public void onResponse(Event[] response) {
                 for(Event e : response) {
                     Log.i("All_Gadera", e.toString());
+
+                    m_FakeEventList.add(e);
                 }
-                ors.onSuccess(response);
+                //ors.onSuccess(response);
             }
         }, new Response.ErrorListener(){
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                }
-            });
+            @Override
+            public void onErrorResponse(VolleyError error) {
+            }
+        });
 
         rQueue.add(jsonRequest);
     }

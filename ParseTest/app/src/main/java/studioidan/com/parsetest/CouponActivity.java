@@ -20,6 +20,7 @@ public class CouponActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupon);
         // coupons names could not contain '~' symbol!
+        fakeEventsOrCoupons.m_fakeEventContext = CouponActivity.this;
         List<GenericEvent> genericEvents= fakeEventsOrCoupons.getFakeEvents();
         int numOfCoupons=genericEvents.size();
         String[] coupons=new String[numOfCoupons];
@@ -31,8 +32,8 @@ public class CouponActivity extends AppCompatActivity {
         }
 
         ListAdapter listAdapter=
-               new CustomAdapter(this,coupons);
-        Splash.writeToFile("here1");
+                new CustomAdapter(this,coupons);
+       // Splash.writeToFile("here1");
         ListView couponsListView=(ListView) findViewById(R.id.couponsListView);
         couponsListView.setAdapter(listAdapter);
     }
