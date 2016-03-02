@@ -1,18 +1,21 @@
 package entities;
 
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
+import android.os.Environment;
+import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
+import restaccessLayer.Event;
+import restaccessLayer.RestAccessLayer;
+import restaccessLayer.RestCallback;
 import studioidan.com.parsetest.R;
 
 /**
@@ -20,11 +23,51 @@ import studioidan.com.parsetest.R;
  */
 public class fakeEventsOrCoupons {
 
-    static List<GenericEvent> businesses = getFakeEvents();
+    static List<GenericEvent> businesses = null;
 
-    public static List<GenericEvent> getFakeEvents(){
+    private static List<GenericEvent> convert(List<Event> toConvert){
+        List<GenericEvent> toReturn=new LinkedList<GenericEvent>();
+       for(Event e: toConvert)
+        toReturn.add(convert(e));
+        return  toReturn;
+    }
+
+    private  static GenericEvent convert(Event e){
+        GenericEvent ge =new GenericEvent();
+       // ge.setImage(e.getImage());
+        ge.setAddress(e.getAddress());
+        ge.setLocation(new ParseGeoPoint(e.getX_location(), e.getY_location()));
+        ge.setPhone(e.getPhone());
+        ge.setAbout(e.getAbout());
+        ge.setArea(e.getArea());
+        ge.setName(e.getName());
+
+        return ge;
+    }
+
+    public static List<GenericEvent> getFakeEvents(Fragment f){
+
+        try {
+            final List<GenericEvent> toReturn;
+            RestAccessLayer rel = RestAccessLayer.getInstance(f.getActivity(), Environment.getExternalStorageDirectory() + "/config.properties");
+            RestCallback<Event[]> rc = new RestCallback<Event[]>();
+            RestCallback.OnResponseSuccess<List<Event>> success = new RestCallback.OnResponseSuccess<List<Event>>() {
+                @Override
+                public void onSuccess(List<Event> result, Fragment f) {
+                    List<GenericEvent> toReturn = convert(result);
+                    Log.i("All_Gadera", "Success Callback");
+
+                }
+            };
+            rel.runJsonRequestGetEvent(success,f);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
 
         /**** Return "SERVER" events ****/
+        /*
         List<GenericEvent> toReturn=new ArrayList<GenericEvent>();
         Resources res = Resources.getSystem();
 
@@ -112,7 +155,7 @@ public class fakeEventsOrCoupons {
         opticsBot.setLocation(new ParseGeoPoint(31.812430, 34.778262));
         opticsBot.setImage(R.drawable.optics_bot);
         toReturn.add(opticsBot);
-
+*/
         return  toReturn;
     }
 

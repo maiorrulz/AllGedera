@@ -1,5 +1,6 @@
 package restaccessLayer;
 
+import android.app.Fragment;
 import android.content.Context;
 import android.util.Log;
 
@@ -86,7 +87,7 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
         rQueue.add(stringRequest);
     }
 
-    public void runJsonRequestGetEvent(final RestCallback.OnResponseSuccess ors) throws IOException {
+    public void runJsonRequestGetEvent(final RestCallback.OnResponseSuccess ors, final Fragment f) throws IOException {
         String url = properties.get("ip") + properties.get("restApiPath") + "/" + properties.get("eventPath");
 
         final Request jsonRequest = new GsonRequest<Event[]> (Request.Method.GET,url, Event[].class, new Response.Listener<Event[]>(){
@@ -95,7 +96,7 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
                 for(Event e : response) {
                     Log.i("All_Gadera", e.toString());
                 }
-                ors.onSuccess(response);
+                ors.onSuccess(response,f);
             }
         }, new Response.ErrorListener(){
                 @Override

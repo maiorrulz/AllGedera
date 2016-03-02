@@ -6,8 +6,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -33,6 +33,7 @@ import java.util.List;
 import entities.GenericEvent;
 import entities.Place;
 import entities.Work;
+import entities.fakeEventsOrCoupons;
 import studioidan.com.parsetest.App;
 import studioidan.com.parsetest.R;
 import studioidan.com.parsetest.Splash;
@@ -53,10 +54,12 @@ public class Fragment_Main_Content extends Fragment {
     HashMap<Marker, GenericEvent> mapBusinesses = new HashMap<Marker, GenericEvent>();
     public String shown = "";
     public boolean gotLocation = false;
+    public Bundle saveInstanceState;
 
-    @Nullable
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.saveInstanceState=savedInstanceState;
         View v = inflater.inflate(R.layout.fragment_main_content, container, false);
         map = getMapFragment().getMap();
         map.setInfoWindowAdapter(infoWindowAdapter);
@@ -154,8 +157,15 @@ public class Fragment_Main_Content extends Fragment {
         }
     }
 
+    public void loadGenericEvents() {
+        App.genericEvents =new ArrayList<GenericEvent>();
+        for (int i = 0; i < fakeEventsOrCoupons.getFakeEvents
+                (this.getFragmentManager().getFragment(this.saveInstanceState, "someString")).size(); i++)
+            App.genericEvents.add(fakeEventsOrCoupons.getFakeEvents(f).get(i));
+
+    }
     public void putBusinessesOnMap() {
-        Splash.loadGenericEvents();
+        loadGenericEvents();
         List<GenericEvent> businesses=App.genericEvents;
         Log.w("matanMsg","put businesses on map. businesses.size()="+businesses.size());
 

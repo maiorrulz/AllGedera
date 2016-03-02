@@ -1,6 +1,7 @@
 package studioidan.com.parsetest;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
@@ -55,10 +56,12 @@ public class Splash extends Activity {
     public boolean isFinished;
     int proccess = 0;
     Handler handler;
+    private Bundle saveInstanceState1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.saveInstanceState1=savedInstanceState;
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.splash);
@@ -69,7 +72,7 @@ public class Splash extends Activity {
 
     private void LoadData() {
        // getWorks();
-        loadGenericEvents();
+       // loadGenericEvents();
         getPlaces();
       //  getCities();
       //  getMsgs();
@@ -154,12 +157,7 @@ public class Splash extends Activity {
         });
     }
 */
-    public static void loadGenericEvents() {
-        App.genericEvents =new ArrayList<GenericEvent>();
-        for (int i = 0; i < fakeEventsOrCoupons.getFakeEvents().size(); i++)
-            App.genericEvents.add(fakeEventsOrCoupons.getFakeEvents().get(i));
 
-    }
 
 
     static File gpxfile=null;
