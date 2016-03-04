@@ -6,8 +6,8 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -33,7 +33,6 @@ import java.util.List;
 import entities.GenericEvent;
 import entities.Place;
 import entities.Work;
-import entities.fakeEventsOrCoupons;
 import studioidan.com.parsetest.App;
 import studioidan.com.parsetest.R;
 import studioidan.com.parsetest.Splash;
@@ -54,12 +53,10 @@ public class Fragment_Main_Content extends Fragment {
     HashMap<Marker, GenericEvent> mapBusinesses = new HashMap<Marker, GenericEvent>();
     public String shown = "";
     public boolean gotLocation = false;
-    public Bundle saveInstanceState;
 
-
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        this.saveInstanceState=savedInstanceState;
         View v = inflater.inflate(R.layout.fragment_main_content, container, false);
         map = getMapFragment().getMap();
         map.setInfoWindowAdapter(infoWindowAdapter);
@@ -131,7 +128,7 @@ public class Fragment_Main_Content extends Fragment {
                     .position(latLng)
                     .title(name)
                     .snippet(address);
-                    //.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_place));
+            //.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_place));
             Marker m = map.addMarker(op);
             mapPlaces.put(m, p);
         }
@@ -157,15 +154,8 @@ public class Fragment_Main_Content extends Fragment {
         }
     }
 
-    public void loadGenericEvents() {
-        App.genericEvents =new ArrayList<GenericEvent>();
-        for (int i = 0; i < fakeEventsOrCoupons.getFakeEvents
-                (this.getFragmentManager().getFragment(this.saveInstanceState, "someString")).size(); i++)
-            App.genericEvents.add(fakeEventsOrCoupons.getFakeEvents(f).get(i));
-
-    }
     public void putBusinessesOnMap() {
-        loadGenericEvents();
+        Splash.loadGenericEvents();
         List<GenericEvent> businesses=App.genericEvents;
         Log.w("matanMsg","put businesses on map. businesses.size()="+businesses.size());
 
@@ -173,10 +163,10 @@ public class Fragment_Main_Content extends Fragment {
         mapPlaces.clear();
         for (GenericEvent business : businesses) {
             Marker newBusinessMarker = map.addMarker(new MarkerOptions()
-                                                    .position(new LatLng(business.getLocation().getLatitude(),
-                                                                         business.getLocation().getLongitude()))
-                                                    .title(business.getName())
-                                                    .snippet(business.getAbout()));
+                    .position(new LatLng(business.getLocation().getLatitude(),
+                            business.getLocation().getLongitude()))
+                    .title(business.getName())
+                    .snippet(business.getAbout()));
             //newBusinessMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.business_info_icon));
             mapBusinesses.put(newBusinessMarker, business);
         }
@@ -188,7 +178,7 @@ public class Fragment_Main_Content extends Fragment {
     public void SetGenericEvents(List<GenericEvent> genericEvents) {
 
         //shown = GenericEvent.class.getSimpleName();
-       // Splash.writeToFile(shown.toString());
+        // Splash.writeToFile(shown.toString());
         //allGenericEvents = genericEvents;
         map.clear();
         mapPlaces.clear();
@@ -238,8 +228,8 @@ public class Fragment_Main_Content extends Fragment {
         @Override
         public void onInfoWindowClick(Marker marker) {
 
-          //  Log.i(tag, "info clicked");
-          //
+            //  Log.i(tag, "info clicked");
+            //
             GenericEvent ge = mapBusinesses.get(marker);
             FragmentDialogBusiness fragmentDialogBusiness = new FragmentDialogBusiness();
             Bundle bundle = new Bundle();
@@ -248,8 +238,8 @@ public class Fragment_Main_Content extends Fragment {
             fragmentDialogBusiness.setArguments(bundle);
             fragmentDialogBusiness.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
             fragmentDialogBusiness.show(getActivity().getSupportFragmentManager(), "genericEvent");
-      //
-       }
+            //
+        }
     };
 
     GoogleMap.InfoWindowAdapter infoWindowAdapter = new GoogleMap.InfoWindowAdapter() {

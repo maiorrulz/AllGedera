@@ -1,6 +1,7 @@
 package studioidan.com.parsetest;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
 
 import com.parse.Parse;
@@ -24,6 +25,9 @@ public class App extends Application {
     public static List<GenericEvent> genericEvents;
     public static List<String> cities;
     public static List<Msg> msgs;
+
+    final static String _TAG = "parsetest[App] : ";
+    public  static Context g_context;
     /*public static App get_instance()
     {
         if(_instance==null)
@@ -55,6 +59,11 @@ public class App extends Application {
                 }
             }
         });
+
+        g_context = getApplicationContext();
+
+        if(g_context == null) Log.d(_TAG, "OMG - g_context is null!");
+
     }
 
     private void init() {

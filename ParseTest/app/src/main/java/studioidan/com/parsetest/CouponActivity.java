@@ -1,9 +1,11 @@
 package studioidan.com.parsetest;
 
-import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
@@ -22,28 +24,58 @@ public class CouponActivity extends AppCompatActivity {
         setContentView(R.layout.activity_coupon);
         // coupons names could not contain '~' symbol!
 
-        GenericEvent[] gea=null;
+        new UpdateAsyncTask(this).execute();
+    }
 
-        List<GenericEvent> genericEvents= fakeEventsOrCoupons.getFakeEvents
-                (this.getFragmentManager().getFragment(savedInstanceState,"")); // maybe th string "" shouldn't be empty
+    public class UpdateAsyncTask extends AsyncTask<Void, Void, Void> {
 
-        // loop until gea is not null
+        Context m_cxt;
+        ListAdapter listAdapter = null;
+        ListView couponsListView = null;
 
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
 
-        int numOfCoupons=genericEvents.size();
-        String[] coupons=new String[numOfCoupons];
-        for(int i=0;i<numOfCoupons;i++){
-            GenericEvent ge = fakeEventsOrCoupons.getFakeEvents(this.getFragmentManager().getFragment(savedInstanceState,"")).get(i);
-            coupons[i]=ge.getName() +
-                    "~"+ge.getAbout() +
-                    "~"+ge.getImage();
+            couponsListView = (ListView) findViewById(R.id.couponsListView);
         }
 
-        ListAdapter listAdapter=
-               new CustomAdapter(this,coupons);
-        Splash.writeToFile("here1");
-        ListView couponsListView=(ListView) findViewById(R.id.couponsListView);
-        couponsListView.setAdapter(listAdapter);
+        public  UpdateAsyncTask(Context cxt)
+        {
+            m_cxt = cxt;
+        }
+
+        @Override
+        protected Void doInBackground( Void... params)
+        {
+            Log.d("All_Gadera", "doInBackground - start");
+            List<GenericEvent> genericEvents= fakeEventsOrCoupons.getFakeEvents();
+            int numOfCoupons=genericEvents.size();
+
+            String[] coupons=new String[numOfCoupons];
+            for(int i=0;i<numOfCoupons;i++){
+                GenericEvent ge = fakeEventsOrCoupons.getFakeEvents().get(i);
+                coupons[i]=ge.getName() +
+                        "~"+ge.getAbout() +
+                        "~"+ge.getImage();
+            }
+
+            listAdapter = new CustomAdapter(m_cxt, coupons);
+            Splash.writeToFile("here1");
+            Log.d("All_Gadera", "doInBackground - end");
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute( Void result ) {
+
+            super.onPostExecute(result);
+            couponsListView.setAdapter(listAdapter);
+
+            Log.d("All_Gadera", "onPostExecute!");
+            //finish();
+        }
     }
 
     public void openMap(View view) {
