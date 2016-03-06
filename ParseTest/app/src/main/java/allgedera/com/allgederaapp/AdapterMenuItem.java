@@ -1,7 +1,6 @@
-package studioidan.com.parsetest;
+package allgedera.com.allgederaapp;
 
 import android.content.Context;
-import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +11,16 @@ import android.widget.TextView;
 import java.util.List;
 
 import entities.MenuDrawerItem;
-import entities.Msg;
 
 /**
- * Created by PopApp_laptop on 21/05/2015.
+ * Created by PopApp_laptop on 18/05/2015.
  */
-public class AdapterMsg extends BaseAdapter {
-    List<Msg> data;
+public class AdapterMenuItem extends BaseAdapter {
+    List<MenuDrawerItem> data;
     Context con;
     LayoutInflater inflater;
 
-    public AdapterMsg(Context c,List<Msg> d)
+    public AdapterMenuItem(Context c,List<MenuDrawerItem> d)
     {
         con = c;
         data = d;
@@ -44,20 +42,15 @@ public class AdapterMsg extends BaseAdapter {
     }
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final Msg item = data.get(position);
+        final MenuDrawerItem item = data.get(position);
         View vi = convertView;
         if (convertView == null)
-            vi = inflater.inflate(R.layout.row_msg, null);
+            vi = inflater.inflate(R.layout.row_menu_list_item, null);
 
-        TextView tvFrom = (TextView) vi.findViewById(R.id.tv_row_msg_from);
-        tvFrom.setText(item.getFrom());
-        try {
-            TextView tvDate = (TextView) vi.findViewById(R.id.tv_row_msg_date);
-            tvDate.setText(DateFormat.format("dd:MM:yyyy", item.getCreatedAt()));
-        }catch (Exception e){}
-
-        TextView tvContent = (TextView) vi.findViewById(R.id.tv_row_msg_content);
-        tvContent.setText(item.getContent());
+        TextView tvName = (TextView) vi.findViewById(R.id.tv_menu_item_name);
+        tvName.setText(item.title.trim());
+        ImageView imgIcon = (ImageView) vi.findViewById(R.id.img_menu_item_icon);
+        imgIcon.setImageResource(item.image);
 
         return vi;
     }

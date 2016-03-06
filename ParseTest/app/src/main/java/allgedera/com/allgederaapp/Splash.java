@@ -1,53 +1,30 @@
-package studioidan.com.parsetest;
+package allgedera.com.allgederaapp;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Environment;
 import android.os.Handler;
 
-import org.json.JSONArray;
-import org.json.XML;
-
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
-import com.studioidan.popapplibrary.CPM;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import entities.GenericEvent;
-import entities.Keys;
-import entities.Msg;
-import entities.Place;
-import entities.Work;
+//import entities.Place;
 import entities.fakeEventsOrCoupons;
 
 
@@ -86,15 +63,12 @@ public class Splash extends Activity {
                 handler.postDelayed(this, 2000);
                 return;
             }
-            boolean isFirst = CPM.getBoolean(Keys.firstTime,true,Splash.this);
+
             Splash.this.finish();
 
 
-            //startActivity(new Intent(Splash.this, FirstTime.class));
-            if(isFirst==true)
-                startActivity(new Intent(Splash.this, FirstTime.class));
-            else
-                startActivity(new Intent(Splash.this, MainActivity.class));
+            //startActivity(new Intent(Splash.this, FirstTime.class))
+            startActivity(new Intent(Splash.this, MainActivity.class));
 
             ParseObject.create("").saveInBackground(new SaveCallback() {
                 @Override
@@ -106,7 +80,7 @@ public class Splash extends Activity {
     };
 
     public void getPlaces() {
-        ParseQuery<Place> query = new ParseQuery<Place>("Place");
+        /*ParseQuery<Place> query = new ParseQuery<Place>("Place");
         query.findInBackground(new FindCallback<Place>() {
             @Override
             public void done(List<Place> list, ParseException e) {
@@ -116,7 +90,7 @@ public class Splash extends Activity {
                     proccess+=1;
                 }
             }
-        });
+        });*/
     }
 
     /*

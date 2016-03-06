@@ -1,4 +1,4 @@
-package studioidan.com.parsetest;
+package allgedera.com.allgederaapp;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

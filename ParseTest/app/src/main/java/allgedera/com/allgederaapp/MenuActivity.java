@@ -1,10 +1,9 @@
-package studioidan.com.parsetest;
+package allgedera.com.allgederaapp;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import android.util.Log;
 import android.view.View;
 
 import com.facebook.FacebookSdk;

@@ -1,4 +1,4 @@
-package studioidan.com.parsetest;
+package allgedera.com.allgederaapp;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -12,7 +12,6 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,22 +20,14 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-
 import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
-import com.parse.ParseQuery;
-import com.parse.SaveCallback;
-import com.studioidan.popapplibrary.HttpAgent;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import entities.MenuDrawerItem;
-import entities.Place;
-import entities.Work;
 import fragments.FragmentDialogContactUs;
 import fragments.FragmentDialogRegister;
 import fragments.FragmentDialog_Msg;
@@ -48,8 +39,8 @@ import satellite.SatelliteMenuItem;
 
 public class MainActivity extends AppCompatActivity implements OnClickListener, AdapterView.OnItemClickListener {
     private String tag = "Main Activity";
-    //List<Place> allPlaces;
-    //List<Work> allWorkPlaces;
+
+
     AdapterMenuItem adapter;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
@@ -148,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                 if (id == 1) {
                     Toast.makeText(MainActivity.this, "עסקים", Toast.LENGTH_SHORT).show();
                     //fr_main_content.SetGenericEvents(App.genericEvents);
-                    fr_main_content.putBusinessesOnMap();
+                    //fr_main_content.putBusinessesOnMap();
                 } else if (id == 2) {/*
                     Toast.makeText(MainActivity.this, "בארים", Toast.LENGTH_SHORT).show();
                     fr_main_content.SetPlaces(App.places);*/

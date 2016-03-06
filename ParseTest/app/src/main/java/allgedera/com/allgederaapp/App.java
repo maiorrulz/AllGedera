@@ -1,4 +1,4 @@
-package studioidan.com.parsetest;
+package allgedera.com.allgederaapp;
 
 import android.app.Application;
 import android.content.Context;
@@ -15,18 +15,17 @@ import java.util.List;
 
 import entities.GenericEvent;
 import entities.Msg;
-import entities.Place;
-import entities.Work;
+//import entities.Place;
 
 public class App extends Application {
     private static App _instance;
-    public static List<Place> places;
-    public static List<Work> works;
+    //public static List<Place> places;
+    //public static List<Work> works;
     public static List<GenericEvent> genericEvents;
     public static List<String> cities;
     public static List<Msg> msgs;
 
-    final static String _TAG = "parsetest[App] : ";
+    final static String _TAG = "allgedera[App] : ";
     public  static Context g_context;
     /*public static App get_instance()
     {
@@ -42,8 +41,8 @@ public class App extends Application {
         init();
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
-        ParseObject.registerSubclass(Place.class);
-        ParseObject.registerSubclass(Work.class);
+        //ParseObject.registerSubclass(Place.class);
+        //ParseObject.registerSubclass(Work.class);
         ParseObject.registerSubclass(Msg.class);
         ParseObject.registerSubclass(GenericEvent.class);
         //Parse.initialize(this, "GqYD4PRVVZnVwMo0B2PWJazBY4frgVxU5EJt0Sft", "fNpOu5TeIhaNUcQs0cVGaurjMFQqoWC2hcZxmkJ6");  // me
@@ -68,8 +67,8 @@ public class App extends Application {
 
     private void init() {
         cities = new ArrayList<String>();
-        places = new ArrayList<Place>();
-        works = new ArrayList<Work>();
+        //places = new ArrayList<Place>();
+        //works = new ArrayList<Work>();
         msgs = new ArrayList<Msg>();
         genericEvents = new ArrayList<GenericEvent>();
     }

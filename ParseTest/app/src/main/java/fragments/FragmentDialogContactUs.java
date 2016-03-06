@@ -5,16 +5,8 @@ import android.support.v4.app.DialogFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import com.parse.ParseObject;
-
-import studioidan.com.parsetest.App;
-import studioidan.com.parsetest.R;
+import allgedera.com.allgederaapp.R;
 
 /**
  * Created by PopApp_laptop on 20/05/2015.

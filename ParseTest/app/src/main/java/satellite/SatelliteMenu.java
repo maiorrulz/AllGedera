@@ -20,7 +20,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import studioidan.com.parsetest.R;
+import allgedera.com.allgederaapp.R;
 
 /**
  * Provides a "Path" like menu for android. ??

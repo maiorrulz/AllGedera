@@ -1,6 +1,5 @@
 package fragments;
 
-import android.content.BroadcastReceiver;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -12,8 +11,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import entities.Msg;
-import studioidan.com.parsetest.App;
-import studioidan.com.parsetest.R;
+import allgedera.com.allgederaapp.App;
+import allgedera.com.allgederaapp.R;
 
 /**
  * Created by PopApp_laptop on 21/05/2015.

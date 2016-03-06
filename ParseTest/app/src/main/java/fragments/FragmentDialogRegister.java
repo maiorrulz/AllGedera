@@ -1,6 +1,5 @@
 package fragments;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.res.AssetManager;
 import android.os.Bundle;
@@ -25,10 +24,9 @@ import com.parse.ParseObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.util.Calendar;
 
-import studioidan.com.parsetest.App;
-import studioidan.com.parsetest.R;
+import allgedera.com.allgederaapp.App;
+import allgedera.com.allgederaapp.R;
 
 /**
  * Created by PopApp_laptop on 20/05/2015.

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     android:background="#FFFFFF"
-    tools:context="studioidan.com.parsetest.Splash">
+    tools:context="allgedera.com.allgederaapp.Splash">
 
 
     <com.rey.material.widget.ProgressView

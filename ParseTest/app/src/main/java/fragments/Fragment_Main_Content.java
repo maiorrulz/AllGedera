@@ -19,23 +19,19 @@ import android.widget.TextView;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import entities.GenericEvent;
-import entities.Place;
-import entities.Work;
-import studioidan.com.parsetest.App;
-import studioidan.com.parsetest.R;
-import studioidan.com.parsetest.Splash;
+//import entities.Place;
+import allgedera.com.allgederaapp.App;
+import allgedera.com.allgederaapp.R;
+import allgedera.com.allgederaapp.Splash;
 
 /**
  * Created by PopApp_laptop on 18/05/2015.
@@ -45,11 +41,11 @@ public class Fragment_Main_Content extends Fragment {
     public static GoogleMap map;
     public static Location myLocation = null;
     public static Polyline currentPath = null;
-    List<Place> allPlaces;
-    List<Work> allWorks;
+    //List<Place> allPlaces;
+    //List<Work> allWorks;
     List<GenericEvent> allGenericEvents;
-    HashMap<Marker, Place> mapPlaces = new HashMap<Marker, Place>();
-    HashMap<Marker, Work> mapWorks = new HashMap<Marker, Work>();
+    //HashMap<Marker, Place> mapPlaces = new HashMap<Marker, Place>();
+    //HashMap<Marker, Work> mapWorks = new HashMap<Marker, Work>();
     HashMap<Marker, GenericEvent> mapBusinesses = new HashMap<Marker, GenericEvent>();
     public String shown = "";
     public boolean gotLocation = false;
@@ -113,7 +109,7 @@ public class Fragment_Main_Content extends Fragment {
         }
     }
 
-    public void SetPlaces(List<Place> places) {
+    /*public void SetPlaces(List<Place> places) {
         shown = Place.class.getSimpleName();
         allPlaces = places;
         map.clear();
@@ -132,9 +128,9 @@ public class Fragment_Main_Content extends Fragment {
             Marker m = map.addMarker(op);
             mapPlaces.put(m, p);
         }
-    }
+    }*/
 
-    public void SetWorks(List<Work> works) {
+    /*public void SetWorks(List<Work> works) {
         shown = Work.class.getSimpleName();
         allWorks = works;
         map.clear();
@@ -152,9 +148,9 @@ public class Fragment_Main_Content extends Fragment {
             Marker m = map.addMarker(op);
             mapWorks.put(m, w);
         }
-    }
+    }*/
 
-    public void putBusinessesOnMap() {
+    /*public void putBusinessesOnMap() {
         Splash.loadGenericEvents();
         List<GenericEvent> businesses=App.genericEvents;
         Log.w("matanMsg","put businesses on map. businesses.size()="+businesses.size());
@@ -173,7 +169,7 @@ public class Fragment_Main_Content extends Fragment {
         map.setOnInfoWindowClickListener(onBusinessInfoWindowClickListener);
         this.shown = GenericEvent.class.getSimpleName();
 
-    }
+    }*/
 
     public void SetGenericEvents(List<GenericEvent> genericEvents) {
 
@@ -181,7 +177,7 @@ public class Fragment_Main_Content extends Fragment {
         // Splash.writeToFile(shown.toString());
         //allGenericEvents = genericEvents;
         map.clear();
-        mapPlaces.clear();
+        //mapPlaces.clear();
         map.setOnInfoWindowClickListener(onBusinessInfoWindowClickListener);
         for (GenericEvent g : genericEvents) {
             LatLng latLng = new LatLng(g.getLocation().getLatitude(), g.getLocation().getLongitude());
@@ -201,10 +197,10 @@ public class Fragment_Main_Content extends Fragment {
         @Override
         public void onInfoWindowClick(Marker marker) {
             Log.i(tag, "info clicked");
-            Place place = mapPlaces.get(marker);
+            //Place place = mapPlaces.get(marker);
             FragmentDialogPlace fragmentDialogPlace = new FragmentDialogPlace();
             Bundle bundle = new Bundle();
-            bundle.putSerializable("place",place);
+            //bundle.putSerializable("place",place);
             fragmentDialogPlace.setArguments(bundle);
             fragmentDialogPlace.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
             fragmentDialogPlace.show(getActivity().getSupportFragmentManager(), "place");
@@ -214,10 +210,10 @@ public class Fragment_Main_Content extends Fragment {
         @Override
         public void onInfoWindowClick(Marker marker) {
             Log.i(tag, "info clicked");
-            Work work = mapWorks.get(marker);
+            //Work work = mapWorks.get(marker);
             FragmentDialogWorks fragmentDialogWorks = new FragmentDialogWorks();
             Bundle bundle = new Bundle();
-            bundle.putSerializable("work",work);
+            //bundle.putSerializable("work",work);
             fragmentDialogWorks.setArguments(bundle);
             fragmentDialogWorks.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
             fragmentDialogWorks.show(getActivity().getSupportFragmentManager(), "work");
@@ -254,9 +250,9 @@ public class Fragment_Main_Content extends Fragment {
             TextView tvName = (TextView) v.findViewById(R.id.tv_info_adapter_name);
             TextView tvAddress = (TextView) v.findViewById(R.id.tv_info_adapter_address);
 
-            if (shown.equals(Work.class.getSimpleName())) {
-                Work w = mapWorks.get(marker);
-                tvName.setText(w.getName());
+            /*if (shown.equals(Work.class.getSimpleName())) {
+                //Work w = mapWorks.get(marker);
+                //tvName.setText(w.getName());
                 tvAddress.setText(w.getAddress());
             } else if(shown.equals((GenericEvent.class.getSimpleName()))) {
                 GenericEvent ge = mapBusinesses.get(marker);
@@ -267,7 +263,7 @@ public class Fragment_Main_Content extends Fragment {
                 Place p = mapPlaces.get(marker);
                 tvName.setText(p.getName());
                 tvAddress.setText(p.getAddress());
-            }
+            }*/
 
             return v;
         }

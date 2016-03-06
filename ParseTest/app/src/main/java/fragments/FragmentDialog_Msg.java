@@ -12,11 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 
-import java.util.List;
-
-import studioidan.com.parsetest.AdapterMsg;
-import studioidan.com.parsetest.App;
-import studioidan.com.parsetest.R;
+import allgedera.com.allgederaapp.AdapterMsg;
+import allgedera.com.allgederaapp.App;
+import allgedera.com.allgederaapp.R;
 
 /**
  * Created by PopApp_laptop on 21/05/2015.

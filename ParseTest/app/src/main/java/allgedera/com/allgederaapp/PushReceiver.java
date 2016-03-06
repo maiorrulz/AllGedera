@@ -1,4 +1,4 @@
-package studioidan.com.parsetest;
+package allgedera.com.allgederaapp;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

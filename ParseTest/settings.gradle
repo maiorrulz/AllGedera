@@ -1,1 +1,1 @@
-include ':app', ':popapplibrary'
+include ':app'

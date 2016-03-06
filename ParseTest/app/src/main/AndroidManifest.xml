@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="studioidan.com.parsetest" >
+    package="allgedera.com.allgederaapp" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -31,13 +31,13 @@
   to match your app's package name + ".permission.C2D_MESSAGE".
     -->
     <permission
-        android:name="studioidan.com.parsetest.permission.C2D_MESSAGE"
+        android:name="allgedera.com.allgederaapp.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="studioidan.com.parsetest.permission.C2D_MESSAGE" />
 
     <application
-        android:name=".App"
+        android:name="allgedera.com.allgederaapp.App"
         android:allowBackup="true"
         android:icon="@drawable/logo_kol_gadera"
         android:label="@string/app_name"
@@ -88,7 +88,7 @@
         </receiver>
 
         <activity
-            android:name=".MainActivity"
+            android:name="allgedera.com.allgederaapp.MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -102,7 +102,7 @@
             android:value="AIzaSyBCmA_i2RV2lcKM0oBgn2j7jemBFUf9nwE" />
 
         <activity
-            android:name=".Splash"
+            android:name="allgedera.com.allgederaapp.Splash"
             android:label="@string/title_activity_splash" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -110,16 +110,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MenuActivity">
+        <activity android:name="allgedera.com.allgederaapp.MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".FirstTime"
-            android:label="@string/title_activity_first_time" />
         <!-- Include the AdActivity configChanges and theme. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
@@ -127,11 +124,11 @@
             android:theme="@android:style/Theme.Translucent" />
 
         <receiver
-            android:name=".PushReceiver"
+            android:name="allgedera.com.allgederaapp.PushReceiver"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name=".LoginActivity">
+        <activity android:name="allgedera.com.allgederaapp.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -139,7 +136,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".CouponActivity" />
+        <activity android:name="allgedera.com.allgederaapp.CouponActivity" />
 
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     </application>

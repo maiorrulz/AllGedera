@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import studioidan.com.parsetest.MainActivity;
-import studioidan.com.parsetest.R;
+import allgedera.com.allgederaapp.MainActivity;
+import allgedera.com.allgederaapp.R;
 
 /**
  * Created by PopApp_laptop on 21/05/2015.

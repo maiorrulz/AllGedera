@@ -1,8 +1,6 @@
 package fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -17,15 +15,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
-import com.parse.ParseFile;
 import com.parse.ParseImageView;
 
 import entities.GenericEvent;
 import navigation.DownloadTask;
-import studioidan.com.parsetest.R;
-import studioidan.com.parsetest.Splash;
+import allgedera.com.allgederaapp.R;
+import allgedera.com.allgederaapp.Splash;
 
 import static navigation.NavigationUtils.getDirectionsUrl;
 

@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import studioidan.com.parsetest.R;
+import allgedera.com.allgederaapp.R;
 
 /**
  * Created by PopApp_laptop on 21/05/2015.

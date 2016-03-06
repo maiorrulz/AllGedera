@@ -1,8 +1,6 @@
 package fragments;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -13,13 +11,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.parse.GetDataCallback;
-import com.parse.ParseException;
 import com.parse.ParseFile;
-import com.parse.ParseImageView;
 
-import entities.Work;
-import studioidan.com.parsetest.R;
+import allgedera.com.allgederaapp.R;
 
 /**
  * Created by PopApp_laptop on 19/05/2015.
@@ -28,14 +22,14 @@ import studioidan.com.parsetest.R;
 
 public class FragmentDialogWorks extends DialogFragment implements View.OnClickListener {
 
-    Work work;
+    //Work work;
     Button btnNav;
     ImageView imgExit;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        work = (Work) getArguments().getSerializable("work");
+        //work = (Work) getArguments().getSerializable("work");
     }
 
     @Override
@@ -46,7 +40,7 @@ public class FragmentDialogWorks extends DialogFragment implements View.OnClickL
         imgExit.setOnClickListener(this);
 
         TextView tvName = ((TextView) v.findViewById(R.id.tv_fragment_work_name));
-        if (work.getName() != null)
+        /*if (work.getName() != null)
             tvName.setText(work.getName());
         TextView tvAdress = ((TextView) v.findViewById(R.id.tv_fragment_work_about));
         if (work.getAddress() != null)
@@ -88,8 +82,8 @@ public class FragmentDialogWorks extends DialogFragment implements View.OnClickL
         }
         else {
             try {
-                String uri = "geo: " + work.getLocation().getLatitude() + "," + work.getLocation().getLongitude();
-                getActivity().startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
+                //String uri = "geo: " + work.getLocation().getLatitude() + "," + work.getLocation().getLongitude();
+                //getActivity().startActivity(new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri)));
             } catch (Exception e) {
             }
         }

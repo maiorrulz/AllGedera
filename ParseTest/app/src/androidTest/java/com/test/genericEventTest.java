@@ -6,9 +6,7 @@ import com.parse.ParseGeoPoint;
 
 import junit.framework.TestCase;
 
-import dalvik.annotation.TestTarget;
 import entities.GenericEvent;
-import studioidan.com.parsetest.R;
 
 /**
  * Created by elash on 19/01/2016.
