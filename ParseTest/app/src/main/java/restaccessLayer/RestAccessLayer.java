@@ -10,6 +10,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -20,7 +22,6 @@ import java.util.logging.Logger;
 public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.ErrorListener*/ {
 
     private static RestAccessLayer dataAccess;
-    private String pathToConfFile;
     private RequestQueue rQueue;
     private Map<String, String> properties;
 
@@ -59,66 +60,34 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
 
 
 
-    public void runGetRequest() {
-        String url = "http://109.65.202.30:8081/gadera/restapi/events";
-        Logger.getAnonymousLogger().info("**********start***************");
-        // Request a string response
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-
-                        // Result handling
-                        System.out.println(response.substring(0,100));
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-                // Error handling
-                System.out.println("Something went wrong!");
-                error.printStackTrace();
-            }
-        });
-
-// Add the request to the queue
-        rQueue.add(stringRequest);
-    }
 
     public void runJsonRequestGetEvent(final RestCallback.OnResponseSuccess ors, final RestCallback.OnResponseFailure orf) throws IOException {
         String url = properties.get("ip") + "/"+properties.get("restApiPath") + "/" + properties.get("eventPath");
 
-        Log.d("All_Gadera(runJsonRequestGetEvent)", url);
-        final Request jsonRequest = new GsonRequest<Event[]> (Request.Method.GET,url, Event[].class, new Response.Listener<Event[]>(){
+        Log.d("All_gedera:url", url);
+        final Request jsonRequest = new GsonRequest<> (url, Event[].class, new Response.Listener<Event[]>(){
             @Override
             public void onResponse(Event[] response) {
                 for(Event e : response) {
                     Log.i("All_Gadera", e.toString());
                 }
+
+                Log.e("matan", "response:" + response[0]);
                 ors.onSuccess(response);
             }
         }, new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {
-                orf.onFailure(error);
-            }
-        });
 
+                    Log.e("matan", "data:" + new String(error.networkResponse.data));
+
+                orf.onFailure(error);
+           //}
+        }
+        });
+        Log.d("matan","before adding request");
         rQueue.add(jsonRequest);
+        Log.d("matan", "after adding request");
     }
 
-//    @Override
-//    public void onErrorResponse(VolleyError error) {
-//
-//    }
-//
-//
-//    @Override
-//    public void onResponse(Event[] response) {
-//        for(Event e : response) {
-//            Log.i("All_Gadera", e.toString());
-//        }
-//
-//    }
 }

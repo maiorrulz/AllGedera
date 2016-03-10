@@ -41,7 +41,7 @@ public class Splash extends Activity {
         setContentView(R.layout.splash);
         handler = new Handler();
         LoadData();
-        handler.postDelayed(runnable, 3000);
+      //  handler.postDelayed(runnable, 3000);
     }
 
     private void LoadData() {
@@ -55,7 +55,7 @@ public class Splash extends Activity {
     }
 
     private String tag = "Splash";
-    Runnable runnable = new Runnable() {
+   /* Runnable runnable = new Runnable() {
         @Override
         public void run() {
             if (proccess < 3) {
@@ -78,7 +78,7 @@ public class Splash extends Activity {
             });
         }
     };
-
+*/
     public void getPlaces() {
         /*ParseQuery<Place> query = new ParseQuery<Place>("Place");
         query.findInBackground(new FindCallback<Place>() {

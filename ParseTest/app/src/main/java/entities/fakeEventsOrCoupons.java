@@ -34,15 +34,12 @@ public class fakeEventsOrCoupons {
 
             /**** Return "SERVER" events ****/
             RestAccessLayer rel = RestAccessLayer.getInstance(App.g_context, Environment.getExternalStorageDirectory() + "/config.properties");
-            //RestCallback<Event[]> rc = new RestCallback<Event[]>();
             RestCallback.OnResponseSuccess success = new RestCallback.OnResponseSuccess<Event[]>() {
                 @Override
                 public void onSuccess(Event[] result) {
                     Log.i("All_Gadera", "Success Callback");
                     m_IsDataArrived = 1;
                     m_EventList = result;
-                    //toReturn.add(_genEvt);
-                    //}
                     // load events to generic, and put on "CouponActivity"
                 }
             };
@@ -51,7 +48,9 @@ public class fakeEventsOrCoupons {
                 @Override
                 public void onFailure(Object result) {
                     m_IsDataArrived = -1; //if failed or server down or anything we don't know :) boom!
-                    Log.i("All_Gadera", ((VolleyError)result).getMessage());
+                    Log.i("All_gedera", "RestCallback.OnResponseFailure failure "+ result.toString()
+                            +
+                            ((VolleyError)result).getMessage());
                 }
             };
 
@@ -59,7 +58,7 @@ public class fakeEventsOrCoupons {
         }
         catch (IOException e)
         {
-            Log.i("All_Gadera(error)", e.getMessage());
+            Log.i("All_gedera(error)", e.getMessage());
             e.printStackTrace();
         }
 
@@ -72,7 +71,7 @@ public class fakeEventsOrCoupons {
                 _genEvt.setAddress(_evt.getAddress());
                 _genEvt.setArea(_evt.getArea());
                 _genEvt.setCategoty(_evt.getCategory());
-                _genEvt.setImage(_evt.getId());
+                //_genEvt.setImage(_evt.getId());
                 _genEvt.setLocation(new ParseGeoPoint(_evt.getX_location(), _evt.getY_location()));
                 //lets check quick
                 Log.d("All_Gadera: ", _evt.getName());
@@ -84,9 +83,5 @@ public class fakeEventsOrCoupons {
         return  toReturn;
     }
 
-
-//    public static GenericEvent getFake(int i){
-//        return businesses.get(i);
-//    }
 
 }

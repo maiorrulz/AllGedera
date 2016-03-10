@@ -61,7 +61,6 @@ public class CouponActivity extends AppCompatActivity {
             }
 
             listAdapter = new CustomAdapter(m_cxt, coupons);
-            Splash.writeToFile("here1");
             Log.d("All_Gadera", "doInBackground - end");
             return null;
         }

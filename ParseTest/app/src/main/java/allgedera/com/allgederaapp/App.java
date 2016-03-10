@@ -18,21 +18,12 @@ import entities.Msg;
 //import entities.Place;
 
 public class App extends Application {
-    private static App _instance;
-    //public static List<Place> places;
-    //public static List<Work> works;
     public static List<GenericEvent> genericEvents;
     public static List<String> cities;
     public static List<Msg> msgs;
 
     final static String _TAG = "allgedera[App] : ";
     public  static Context g_context;
-    /*public static App get_instance()
-    {
-        if(_instance==null)
-            _instance=new App();
-        return  _instance;
-    }*/
 
     @Override
     public void onCreate() {
@@ -41,12 +32,9 @@ public class App extends Application {
         init();
         // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
-        //ParseObject.registerSubclass(Place.class);
-        //ParseObject.registerSubclass(Work.class);
         ParseObject.registerSubclass(Msg.class);
         ParseObject.registerSubclass(GenericEvent.class);
-        //Parse.initialize(this, "GqYD4PRVVZnVwMo0B2PWJazBY4frgVxU5EJt0Sft", "fNpOu5TeIhaNUcQs0cVGaurjMFQqoWC2hcZxmkJ6");  // me
-        Parse.initialize(this, "1gOrgDgD5Wk615TD4vsZBrzI4z5m3El7Ua84cHeX", "qtUAWSNq0fGxXh4N3jljU1RroYeuGb0MQLzCn30U");
+          Parse.initialize(this, "1gOrgDgD5Wk615TD4vsZBrzI4z5m3El7Ua84cHeX", "qtUAWSNq0fGxXh4N3jljU1RroYeuGb0MQLzCn30U");
 
         ParsePush.subscribeInBackground("", new SaveCallback() {
             @Override
@@ -67,8 +55,6 @@ public class App extends Application {
 
     private void init() {
         cities = new ArrayList<String>();
-        //places = new ArrayList<Place>();
-        //works = new ArrayList<Work>();
         msgs = new ArrayList<Msg>();
         genericEvents = new ArrayList<GenericEvent>();
     }

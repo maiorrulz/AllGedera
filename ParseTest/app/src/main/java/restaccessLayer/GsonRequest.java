@@ -26,7 +26,7 @@ public class GsonRequest<T> extends Request<T> {
     private final Listener<T> mListener;
 
 
-    public GsonRequest(int method,
+    public GsonRequest(
                        String url,
                        Class<T> clazz,
                        Listener<T> listener,
@@ -35,20 +35,11 @@ public class GsonRequest<T> extends Request<T> {
         this.mClazz = clazz;
         this.mListener = listener;
         mGson = new Gson();
+        Log.d("matan","build json request end");
     }
 
 
-    public GsonRequest(int method,
-                       String url,
-                       Class<T> clazz,
-                       Listener<T> listener,
-                       ErrorListener errorListener,
-                       Gson gson) {
-        super(Method.GET, url, errorListener);
-        this.mClazz = clazz;
-        this.mListener = listener;
-        mGson = gson;
-    }
+
 
 
     @Override

@@ -21,6 +21,7 @@ public class ResponseEventWrapper<T> implements Response.Listener<Event[]>, Resp
     }
 
     @Override
+    //public void onResponse(Event[] response) {
     public void onResponse(Event[] response) {
         for(Event e : response) {
             Log.i("All_Gadera", e.toString());

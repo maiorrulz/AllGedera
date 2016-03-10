@@ -32,9 +32,12 @@ public class PropertiesInitilizator {
             input = new FileInputStream(pathToConfigFile);
             prop.load(input);
             input = new FileInputStream(pathToConfigFile);
-            propertiesMap.put("ip", prop.getProperty("ip"));
+            /*propertiesMap.put("ip", prop.getProperty("ip"));
             propertiesMap.put("restApiPath", prop.getProperty("restApiPath"));
-            propertiesMap.put("eventPath", prop.getProperty("eventPath"));
+            propertiesMap.put("eventPath", prop.getProperty("eventPath"));*/
+            propertiesMap.put("ip", "http://172.16.240.61:8080/gadera");
+            propertiesMap.put("restApiPath", "restapi");
+            propertiesMap.put("eventPath", "events/test2");
             return propertiesMap;
         } catch (IOException e) {
 
