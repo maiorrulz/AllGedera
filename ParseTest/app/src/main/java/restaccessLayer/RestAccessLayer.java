@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.logging.Logger;
 
+import allgedera.com.allgederaapp.Constants;
+
 /**
  * Created by Alex on 1/9/2016.
  */
@@ -23,7 +25,6 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
 
     private static RestAccessLayer dataAccess;
     private RequestQueue rQueue;
-    private Map<String, String> properties;
 
     private RestAccessLayer() {
     };
@@ -42,15 +43,6 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
                         throw new IOException("Path to file empty or null.Provide correct path");
                     }
                     dataAccess.rQueue =Volley.newRequestQueue(context);
-
-
-                    PropertiesInitilizator pi = new PropertiesInitilizator(pathToConfigFile);
-                    dataAccess.properties = pi.initPropertyInfo();
-                    if(dataAccess.properties == null) {
-                        System.err.println("Error initializing properties");
-                        throw new IOException("Failed to init properties from file " + pathToConfigFile);
-                    }
-
                 }
             }
         }
@@ -62,7 +54,7 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
 
 
     public void runJsonRequestGetEvent(final RestCallback.OnResponseSuccess ors, final RestCallback.OnResponseFailure orf) throws IOException {
-        String url = properties.get("ip") + "/"+properties.get("restApiPath") + "/" + properties.get("eventPath");
+        String url = Constants.url;
 
         Log.d("All_gedera:url", url);
         final Request jsonRequest = new GsonRequest<> (url, Event[].class, new Response.Listener<Event[]>(){
@@ -71,8 +63,6 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
                 for(Event e : response) {
                     Log.i("All_Gadera", e.toString());
                 }
-
-                Log.e("matan", "response:" + response[0]);
                 ors.onSuccess(response);
             }
         }, new Response.ErrorListener(){

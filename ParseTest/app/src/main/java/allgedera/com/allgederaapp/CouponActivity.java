@@ -22,8 +22,22 @@ public class CouponActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coupon);
         // coupons names could not contain '~' symbol!
+       // new UpdateAsyncTask(this).execute();
 
-        new UpdateAsyncTask(this).execute();
+        List<GenericEvent> genericEvents= fakeEventsOrCoupons.getFakeEvents();
+        int numOfCoupons=genericEvents.size();
+
+        String[] coupons=new String[numOfCoupons];
+        for(int i=0;i<numOfCoupons;i++){
+            GenericEvent ge = fakeEventsOrCoupons.getFakeEvents().get(i);
+            coupons[i]=ge.getName() +
+                    "~"+ge.getAbout() +
+                    "~"+ge.getImage();
+        }
+
+        ListView couponsListView = (ListView) findViewById(R.id.couponsListView);
+        ListAdapter listAdapter = new CustomAdapter(getApplicationContext(), coupons);
+        couponsListView.setAdapter(listAdapter);
     }
 
     public class UpdateAsyncTask extends AsyncTask<Void, Void, Void> {

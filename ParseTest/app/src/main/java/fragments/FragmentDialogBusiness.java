@@ -36,7 +36,6 @@ public class FragmentDialogBusiness extends DialogFragment implements View.OnCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         Log.w("matanMsg","onCreate");
-        Splash.writeToFile1("FragmentDialogBusiness-> onCreate");
         super.onCreate(savedInstanceState);
         ge = (GenericEvent) getArguments().getSerializable("genericEvent");
         //myLocation = (Location) getArguments().getSerializable("myLocation");
@@ -99,7 +98,6 @@ public class FragmentDialogBusiness extends DialogFragment implements View.OnCli
 
     @Override
     public void onClick(View view) {
-        Splash.writeToFile2(view.toString());
         if(view.getId() == R.id.img_exit)
         {
             dismiss();
