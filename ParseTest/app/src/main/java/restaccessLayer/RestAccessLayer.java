@@ -29,18 +29,13 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
     private RestAccessLayer() {
     };
 
-    public static RestAccessLayer getInstance(Context context, String pathToConfigFile) throws IOException {
+    public static RestAccessLayer getInstance(Context context) throws IOException {
         if (dataAccess == null) {
             synchronized (RestAccessLayer.class) {
                 if (dataAccess == null) {
                     dataAccess = new RestAccessLayer();
-                    if(context == null)
-                    {
+                    if(context == null) {
                         throw new IOException("Context is null.Provide correct context");
-                    }
-                    if(pathToConfigFile.isEmpty() || pathToConfigFile == null)
-                    {
-                        throw new IOException("Path to file empty or null.Provide correct path");
                     }
                     dataAccess.rQueue =Volley.newRequestQueue(context);
                 }
@@ -49,20 +44,11 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
         return dataAccess;
     }
 
-
-
-
-
     public void runJsonRequestGetEvent(final RestCallback.OnResponseSuccess ors, final RestCallback.OnResponseFailure orf) throws IOException {
         String url = Constants.url;
-
-        Log.d("All_gedera:url", url);
         final Request jsonRequest = new GsonRequest<> (url, Event[].class, new Response.Listener<Event[]>(){
             @Override
             public void onResponse(Event[] response) {
-                for(Event e : response) {
-                    Log.i("All_Gadera", e.toString());
-                }
                 ors.onSuccess(response);
             }
         }, new Response.ErrorListener(){
@@ -70,14 +56,11 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
             public void onErrorResponse(VolleyError error) {
 
                     Log.e("matan", "data:" + new String(error.networkResponse.data));
-
                 orf.onFailure(error);
            //}
         }
         });
-        Log.d("matan","before adding request");
         rQueue.add(jsonRequest);
-        Log.d("matan", "after adding request");
     }
 
 }

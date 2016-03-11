@@ -20,7 +20,6 @@ import com.parse.ParseImageView;
 import entities.GenericEvent;
 import navigation.DownloadTask;
 import allgedera.com.allgederaapp.R;
-import allgedera.com.allgederaapp.Splash;
 
 import static navigation.NavigationUtils.getDirectionsUrl;
 
@@ -30,12 +29,10 @@ public class FragmentDialogBusiness extends DialogFragment implements View.OnCli
     GenericEvent ge;
     Button btnNav, btnShowWay, panView;
     ImageView imgExit;
-//    Location myLocation;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.w("matanMsg","onCreate");
         super.onCreate(savedInstanceState);
         ge = (GenericEvent) getArguments().getSerializable("genericEvent");
         //myLocation = (Location) getArguments().getSerializable("myLocation");
@@ -44,9 +41,6 @@ public class FragmentDialogBusiness extends DialogFragment implements View.OnCli
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-     //   Splash.writeToFile3("FragmentDialogBusiness-> onCreateView return null!");
-
-        //return null;
         View view = inflater.inflate(R.layout.fragment_dialog_business, container, false);
 
         imgExit = (ImageView) view.findViewById(R.id.img_exit);

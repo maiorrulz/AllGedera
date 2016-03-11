@@ -21,50 +21,43 @@ import allgedera.com.allgederaapp.App;
  */
 public class fakeEventsOrCoupons {
 
-    //static List<GenericEvent> businesses = getFakeEvents();
-
     static int m_IsDataArrived = 0;
-    static Event[] m_EventList = null;
+    static Event[] m_BusinessesList = null;
 
-    public static List<GenericEvent> getFakeEvents()
-    {
-        List<GenericEvent> toReturn = new ArrayList<GenericEvent>();
-        final Resources res = Resources.getSystem();
+    // load events to generic, and put on "CouponActivity"
+    public static void loadBusinesses() {
         try {
-
             /**** Return "SERVER" events ****/
-            RestAccessLayer rel = RestAccessLayer.getInstance(App.g_context, Environment.getExternalStorageDirectory() + "/config.properties");
+            RestAccessLayer rel = RestAccessLayer.getInstance(App.g_context);
             RestCallback.OnResponseSuccess success = new RestCallback.OnResponseSuccess<Event[]>() {
                 @Override
                 public void onSuccess(Event[] result) {
                     Log.i("All_Gadera", "Success Callback");
                     m_IsDataArrived = 1;
-                    m_EventList = result;
-                    // load events to generic, and put on "CouponActivity"
+                    m_BusinessesList = result;
                 }
             };
-
             RestCallback.OnResponseFailure failure = new RestCallback.OnResponseFailure() {
                 @Override
                 public void onFailure(Object result) {
                     m_IsDataArrived = -1; //if failed or server down or anything we don't know :) boom!
-                    Log.i("All_gedera", "RestCallback.OnResponseFailure failure "+ result.toString()
+                    Log.i("All_gedera", "RestCallback.OnResponseFailure failure " + result.toString()
                             +
-                            ((VolleyError)result).getMessage());
+                            ((VolleyError) result).getMessage());
                 }
             };
-
             rel.runJsonRequestGetEvent(success, failure);
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             Log.i("All_gedera(error)", e.getMessage());
             e.printStackTrace();
         }
+    }
 
-        if(m_EventList != null) {
-            for (int i = 0; i < m_EventList.length; i++) {
-                Event _evt = m_EventList[i];
+    public static List<GenericEvent> getBusinesses() {
+        List<GenericEvent> toReturn = new ArrayList<GenericEvent>();
+        if(m_BusinessesList != null) {
+            for (int i = 0; i < m_BusinessesList.length; i++) {
+                Event _evt = m_BusinessesList[i];
                 GenericEvent _genEvt = new GenericEvent();
                 _genEvt.setName(_evt.getName());
                 _genEvt.setAbout(_evt.getAbout());
@@ -73,15 +66,14 @@ public class fakeEventsOrCoupons {
                 _genEvt.setCategoty(_evt.getCategory());
                 //_genEvt.setImage(_evt.getId());
                 _genEvt.setLocation(new ParseGeoPoint(_evt.getX_location(), _evt.getY_location()));
-                //lets check quick
-                Log.d("All_Gadera: ", _evt.getName());
                 toReturn.add(_genEvt);
             }
         }
-
-
         return  toReturn;
     }
 
 
+    public static boolean existBusinesses() {
+        return m_BusinessesList != null;
+    }
 }

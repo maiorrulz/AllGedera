@@ -28,10 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import entities.GenericEvent;
-//import entities.Place;
-import allgedera.com.allgederaapp.App;
 import allgedera.com.allgederaapp.R;
-import allgedera.com.allgederaapp.Splash;
 
 /**
  * Created by PopApp_laptop on 18/05/2015.
@@ -41,14 +38,7 @@ public class Fragment_Main_Content extends Fragment {
     public static GoogleMap map;
     public static Location myLocation = null;
     public static Polyline currentPath = null;
-    //List<Place> allPlaces;
-    //List<Work> allWorks;
-    List<GenericEvent> allGenericEvents;
-    //HashMap<Marker, Place> mapPlaces = new HashMap<Marker, Place>();
-    //HashMap<Marker, Work> mapWorks = new HashMap<Marker, Work>();
-    HashMap<Marker, GenericEvent> mapBusinesses = new HashMap<Marker, GenericEvent>();
-    public String shown = "";
-    public boolean gotLocation = false;
+     HashMap<Marker, GenericEvent> mapBusinesses = new HashMap<Marker, GenericEvent>();
 
     @Nullable
     @Override
@@ -150,31 +140,10 @@ public class Fragment_Main_Content extends Fragment {
         }
     }*/
 
-    /*public void putBusinessesOnMap() {
-        Splash.loadGenericEvents();
-        List<GenericEvent> businesses=App.genericEvents;
-        Log.w("matanMsg","put businesses on map. businesses.size()="+businesses.size());
-
-        map.clear();
-        mapPlaces.clear();
-        for (GenericEvent business : businesses) {
-            Marker newBusinessMarker = map.addMarker(new MarkerOptions()
-                    .position(new LatLng(business.getLocation().getLatitude(),
-                            business.getLocation().getLongitude()))
-                    .title(business.getName())
-                    .snippet(business.getAbout()));
-            //newBusinessMarker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.business_info_icon));
-            mapBusinesses.put(newBusinessMarker, business);
-        }
-        map.setOnInfoWindowClickListener(onBusinessInfoWindowClickListener);
-        this.shown = GenericEvent.class.getSimpleName();
-
-    }*/
 
     public void SetGenericEvents(List<GenericEvent> genericEvents) {
 
         //shown = GenericEvent.class.getSimpleName();
-        // Splash.writeToFile(shown.toString());
         //allGenericEvents = genericEvents;
         map.clear();
         //mapPlaces.clear();

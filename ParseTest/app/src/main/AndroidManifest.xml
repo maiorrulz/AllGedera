@@ -101,15 +101,6 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBCmA_i2RV2lcKM0oBgn2j7jemBFUf9nwE" />
 
-        <activity
-            android:name="allgedera.com.allgederaapp.Splash"
-            android:label="@string/title_activity_splash" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name="allgedera.com.allgederaapp.MenuActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

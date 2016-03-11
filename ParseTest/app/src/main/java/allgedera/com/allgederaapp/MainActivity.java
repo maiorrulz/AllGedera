@@ -29,7 +29,6 @@ import java.util.List;
 
 import entities.MenuDrawerItem;
 import fragments.FragmentDialogContactUs;
-import fragments.FragmentDialogRegister;
 import fragments.FragmentDialog_Msg;
 import fragments.Fragment_Main_Content;
 
@@ -129,8 +128,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     private void initArcMenu() {
         SatelliteMenu menu = (SatelliteMenu) findViewById(R.id.menu);
         List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
-       // items.add(new SatelliteMenuItem(3, R.drawable.img_arc_register));
-        //items.add(new SatelliteMenuItem(2, R.drawable.img_arc_party));
         items.add(new SatelliteMenuItem(1, R.drawable.img_arc_work));
 
         menu.addItems(items);
@@ -140,13 +137,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
                     Toast.makeText(MainActivity.this, "עסקים", Toast.LENGTH_SHORT).show();
                     //fr_main_content.SetGenericEvents(App.genericEvents);
                     //fr_main_content.putBusinessesOnMap();
-                } else if (id == 2) {/*
-                    Toast.makeText(MainActivity.this, "בארים", Toast.LENGTH_SHORT).show();
-                    fr_main_content.SetPlaces(App.places);*/
-                } else if (id == 3) {/*
-                    onItemClick(null, null, 3, 0);
-                    Toast.makeText(MainActivity.this, "הרשמה לקבלת עבודה", Toast.LENGTH_SHORT).show();
-                    */
                 }
             }
         });
@@ -160,14 +150,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     private void init() {
         fr_main_content = (Fragment_Main_Content) getSupportFragmentManager().findFragmentById(R.id.fragment);
-
         adapter = new AdapterMenuItem(MainActivity.this, new ArrayList<MenuDrawerItem>());
         adapter.data.add(new MenuDrawerItem("עסקים", R.drawable.img_menu_work));
-        //adapter.data.add(new MenuDrawerItem("בארים", R.drawable.img_menu_party));
-        //adapter.data.add(new MenuDrawerItem("לוח יחצנים", R.drawable.img_menu_party_managers));
-        //adapter.data.add(new MenuDrawerItem("הרשמה לקבלת עבודה", R.drawable.img_register_to_get_job));
-        //adapter.data.add(new MenuDrawerItem("צור קשר", R.drawable.img_menu_contact_us));
-
         //drawerMenu
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.list_slidermenu);
@@ -218,23 +202,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        if (i == 0) {
+
             fr_main_content.SetGenericEvents(App.genericEvents);
-        } else if (i == 1) {
-            //fr_main_content.SetPlaces(App.places);
-        } else if (i == 2) {
-            FragmentDialog_Msg fragmentDialog_msg = new FragmentDialog_Msg();
-            fragmentDialog_msg.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-            fragmentDialog_msg.show(getSupportFragmentManager(), "msg");
-        } else if (i == 3) {
-            FragmentDialogRegister fragmentDialogRegister = new FragmentDialogRegister();
-            fragmentDialogRegister.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-            fragmentDialogRegister.show(getSupportFragmentManager(), "register");
-        } else if (i == 4) {
-            FragmentDialogContactUs fragmentDialogContactUs = new FragmentDialogContactUs();
-            fragmentDialogContactUs.setStyle(DialogFragment.STYLE_NO_TITLE, 0);
-            fragmentDialogContactUs.show(getSupportFragmentManager(), "contactUs");
-        }
+
         mDrawerLayout.closeDrawers();
     }
 }
