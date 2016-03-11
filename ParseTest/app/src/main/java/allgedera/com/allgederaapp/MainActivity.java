@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
@@ -28,8 +27,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import entities.MenuDrawerItem;
-import fragments.FragmentDialogContactUs;
-import fragments.FragmentDialog_Msg;
 import fragments.Fragment_Main_Content;
 
 import satellite.SatelliteMenu;
@@ -37,15 +34,13 @@ import satellite.SatelliteMenuItem;
 
 
 public class MainActivity extends AppCompatActivity implements OnClickListener, AdapterView.OnItemClickListener {
-    private String tag = "Main Activity";
-
 
     AdapterMenuItem adapter;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
     Fragment_Main_Content fr_main_content;
-/**/
+
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void forceRTLIfSupported() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -56,24 +51,12 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-      //  DataAccessServer das = DataAccessServer.getInstance();
-       // List<Event> listEvent = das.getAllEvent();
-
         forceRTLIfSupported();
-        // the new main activity
-
-        //setContentView(R.layout.activity_main1);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setTitle("כל גדרה");
         init();
         initArcMenu();
         createParseClassess();
-
-       //AdView mAdView = (AdView) findViewById(R.id.adView);
-       // AdRequest adRequest = new AdRequest.Builder().build();
-       // mAdView.loadAd(adRequest);
-
         turnGpsOn();
     }
 
@@ -129,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         SatelliteMenu menu = (SatelliteMenu) findViewById(R.id.menu);
         List<SatelliteMenuItem> items = new ArrayList<SatelliteMenuItem>();
         items.add(new SatelliteMenuItem(1, R.drawable.img_arc_work));
-
         menu.addItems(items);
         menu.setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
             public void eventOccured(int id) {

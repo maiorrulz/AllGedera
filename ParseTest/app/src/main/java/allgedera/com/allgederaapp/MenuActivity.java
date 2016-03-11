@@ -16,12 +16,12 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_menu);
-        Profile profile = Profile.getCurrentProfile();
+        Profile profile = Profile.getCurrentProfile(); // facebook profile
 
     }
 
-    public void openCoupons(View view) {
-        Intent intent = new Intent(this, CouponActivity.class);
+    public void openBuisnessesList(View view) {
+        Intent intent = new Intent(this, BuisnessesList.class);
         startActivity(intent);
     }
 }

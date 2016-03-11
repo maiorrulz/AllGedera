@@ -127,7 +127,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="allgedera.com.allgederaapp.CouponActivity" />
+        <activity android:name="allgedera.com.allgederaapp.BuisnessesList" />
 
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     </application>

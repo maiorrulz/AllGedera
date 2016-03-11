@@ -24,7 +24,6 @@ public class fakeEventsOrCoupons {
     static int m_IsDataArrived = 0;
     static Event[] m_BusinessesList = null;
 
-    // load events to generic, and put on "CouponActivity"
     public static void loadBusinesses() {
         try {
             /**** Return "SERVER" events ****/

@@ -54,10 +54,7 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
         }, new Response.ErrorListener(){
             @Override
             public void onErrorResponse(VolleyError error) {
-
-                    Log.e("matan", "data:" + new String(error.networkResponse.data));
-                orf.onFailure(error);
-           //}
+                    orf.onFailure(error);
         }
         });
         rQueue.add(jsonRequest);

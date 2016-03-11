@@ -15,7 +15,7 @@ import java.util.List;
 import entities.GenericEvent;
 import entities.fakeEventsOrCoupons;
 
-public class CouponActivity extends AppCompatActivity {
+public class BuisnessesList extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +43,8 @@ public class CouponActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground( Void... params)
         {
-            Log.d("All_Gadera", "doInBackground - start");
             fakeEventsOrCoupons.loadBusinesses();
-            int k=0;
-            while ((!fakeEventsOrCoupons.existBusinesses())&&k<20)
-            try {
-                k++;
-                Thread.sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            waitUntilBuisnessesLoaded();
             List<GenericEvent> genericEvents=fakeEventsOrCoupons.getBusinesses();
             int numOfCoupons=genericEvents.size();
 
@@ -63,7 +55,6 @@ public class CouponActivity extends AppCompatActivity {
                         "~"+ge.getAbout() +
                         "~"+ge.getImage();
             }
-
             listAdapter = new CustomAdapter(m_cxt, coupons);
             Log.d("All_Gadera", "doInBackground - end");
             return null;
@@ -75,6 +66,17 @@ public class CouponActivity extends AppCompatActivity {
             couponsListView.setAdapter(listAdapter);
             Log.d("All_Gadera", "onPostExecute!");
             //finish();
+        }
+    }
+
+    private void waitUntilBuisnessesLoaded() {
+        int k=0;
+        while ((!fakeEventsOrCoupons.existBusinesses())&&k<20)
+        try {
+            k++;
+            Thread.sleep(100);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
