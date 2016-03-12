@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Intent intent = new Intent(activity, MenuActivity.class);
+                Intent intent = new Intent(activity, fourBtnsActivity.class);
                 startActivity(intent);
                 //Profile profile = Profile.getCurrentProfile();
                 //if (profile != null)
@@ -41,14 +41,14 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onCancel() {
-                Intent intent = new Intent(activity, MenuActivity.class);
+                Intent intent = new Intent(activity, fourBtnsActivity.class);
                 startActivity(intent);
                 //((TextView)findViewById(R.id.welcomeText)).setText("Welcome c");
             }
 
             @Override
             public void onError(FacebookException error) {
-                Intent intent = new Intent(activity, MenuActivity.class);
+                Intent intent = new Intent(activity, fourBtnsActivity.class);
                 startActivity(intent);
                 //((TextView)findViewById(R.id.welcomeText)).setText("Welcome e");
             }

@@ -15,14 +15,16 @@ import java.util.List;
 import entities.GenericEvent;
 import entities.fakeEventsOrCoupons;
 
-public class BuisnessesList extends AppCompatActivity {
+public class BusinessesListActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_coupon);
+        setContentView(R.layout.buisnesses_list);
         new UpdateAsyncTask(this).execute();
+
     }
+
 
     public class UpdateAsyncTask extends AsyncTask<Void, Void, Void> {
         Context m_cxt;
@@ -35,18 +37,19 @@ public class BuisnessesList extends AppCompatActivity {
             couponsListView = (ListView) findViewById(R.id.couponsListView);
         }
 
-        public  UpdateAsyncTask(Context cxt)
-        {
+        public  UpdateAsyncTask(Context cxt) {
             m_cxt = cxt;
         }
 
         @Override
-        protected Void doInBackground( Void... params)
+        protected Void doInBackground(Void... params)
         {
             fakeEventsOrCoupons.loadBusinesses();
-            waitUntilBuisnessesLoaded();
+            waitUntilBusinessesLoaded();
             List<GenericEvent> genericEvents=fakeEventsOrCoupons.getBusinesses();
             int numOfCoupons=genericEvents.size();
+
+            Log.d("matan","numOfCoupons="+numOfCoupons);
 
             String[] coupons=new String[numOfCoupons];
             for(int i=0;i<numOfCoupons;i++){
@@ -56,7 +59,6 @@ public class BuisnessesList extends AppCompatActivity {
                         "~"+ge.getImage();
             }
             listAdapter = new CustomAdapter(m_cxt, coupons);
-            Log.d("All_Gadera", "doInBackground - end");
             return null;
         }
 
@@ -64,24 +66,23 @@ public class BuisnessesList extends AppCompatActivity {
         protected void onPostExecute( Void result ) {
             super.onPostExecute(result);
             couponsListView.setAdapter(listAdapter);
-            Log.d("All_Gadera", "onPostExecute!");
-            //finish();
         }
     }
 
-    private void waitUntilBuisnessesLoaded() {
+
+    private void waitUntilBusinessesLoaded() {
         int k=0;
         while ((!fakeEventsOrCoupons.existBusinesses())&&k<20)
         try {
             k++;
-            Thread.sleep(100);
+            Thread.sleep(1000/k);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
 
     public void openMap(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, BusinessesOnMapActivity.class);
         startActivity(intent);
     }
 }

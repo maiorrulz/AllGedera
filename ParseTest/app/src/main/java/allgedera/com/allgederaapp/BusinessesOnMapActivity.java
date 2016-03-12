@@ -33,7 +33,7 @@ import satellite.SatelliteMenu;
 import satellite.SatelliteMenuItem;
 
 
-public class MainActivity extends AppCompatActivity implements OnClickListener, AdapterView.OnItemClickListener {
+public class BusinessesOnMapActivity extends AppCompatActivity implements OnClickListener, AdapterView.OnItemClickListener {
 
     AdapterMenuItem adapter;
     private DrawerLayout mDrawerLayout;
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
         menu.setOnItemClickedListener(new SatelliteMenu.SateliteClickedListener() {
             public void eventOccured(int id) {
                 if (id == 1) {
-                    Toast.makeText(MainActivity.this, "עסקים", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BusinessesOnMapActivity.this, "עסקים", Toast.LENGTH_SHORT).show();
                     //fr_main_content.SetGenericEvents(App.genericEvents);
                     //fr_main_content.putBusinessesOnMap();
                 }
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener, 
 
     private void init() {
         fr_main_content = (Fragment_Main_Content) getSupportFragmentManager().findFragmentById(R.id.fragment);
-        adapter = new AdapterMenuItem(MainActivity.this, new ArrayList<MenuDrawerItem>());
+        adapter = new AdapterMenuItem(BusinessesOnMapActivity.this, new ArrayList<MenuDrawerItem>());
         adapter.data.add(new MenuDrawerItem("עסקים", R.drawable.img_menu_work));
         //drawerMenu
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);

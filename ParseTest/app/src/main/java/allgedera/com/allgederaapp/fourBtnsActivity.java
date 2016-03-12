@@ -7,21 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.facebook.FacebookSdk;
-import com.facebook.Profile;
 
-public class MenuActivity extends AppCompatActivity {
+public class fourBtnsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_menu);
-        Profile profile = Profile.getCurrentProfile(); // facebook profile
-
+       // Profile profile = Profile.getCurrentProfile(); // facebook profile
     }
 
-    public void openBuisnessesList(View view) {
-        Intent intent = new Intent(this, BuisnessesList.class);
+    public void openBusinessesList(View view) {
+        Intent intent = new Intent(this, BusinessesListActivity.class);
         startActivity(intent);
     }
 }

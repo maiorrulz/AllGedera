@@ -6,5 +6,5 @@ package allgedera.com.allgederaapp;
 public class Constants {
 
     final static String _TAG = "allgedera[App] :";
-    public static String url="http://192.168.56.1:8080/gadera/restapi/businesses/json";
+    public static String url="http://allgedera.wuemp33qja.us-east-1.elasticbeanstalk.com/restapi/businesses/json";
 }

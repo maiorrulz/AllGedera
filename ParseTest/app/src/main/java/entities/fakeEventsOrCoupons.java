@@ -31,7 +31,7 @@ public class fakeEventsOrCoupons {
             RestCallback.OnResponseSuccess success = new RestCallback.OnResponseSuccess<Event[]>() {
                 @Override
                 public void onSuccess(Event[] result) {
-                    Log.i("All_Gadera", "Success Callback");
+                    Log.i("matan", "Success Callback");
                     m_IsDataArrived = 1;
                     m_BusinessesList = result;
                 }
@@ -40,14 +40,14 @@ public class fakeEventsOrCoupons {
                 @Override
                 public void onFailure(Object result) {
                     m_IsDataArrived = -1; //if failed or server down or anything we don't know :) boom!
-                    Log.i("All_gedera", "RestCallback.OnResponseFailure failure " + result.toString()
+                    Log.i("matan", "RestCallback.OnResponseFailure failure " + result.toString()
                             +
                             ((VolleyError) result).getMessage());
                 }
             };
             rel.runJsonRequestGetEvent(success, failure);
         } catch (IOException e) {
-            Log.i("All_gedera(error)", e.getMessage());
+            Log.i("matan", e.getMessage());
             e.printStackTrace();
         }
     }

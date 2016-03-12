@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import allgedera.com.allgederaapp.MainActivity;
+import allgedera.com.allgederaapp.BusinessesOnMapActivity;
 import allgedera.com.allgederaapp.R;
 
 /**
@@ -26,6 +26,6 @@ public class Fr_4 extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         getActivity().finish();
-        startActivity(new Intent(getActivity(), MainActivity.class));
+        startActivity(new Intent(getActivity(), BusinessesOnMapActivity.class));
     }
 }

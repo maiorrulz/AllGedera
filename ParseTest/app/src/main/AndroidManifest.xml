@@ -30,12 +30,14 @@
   IMPORTANT: Change "com.parse.tutorials.pushnotifications.permission.C2D_MESSAGE" in the lines below
   to match your app's package name + ".permission.C2D_MESSAGE".
     -->
+
+    <!--
     <permission
         android:name="allgedera.com.allgederaapp.permission.C2D_MESSAGE"
         android:protectionLevel="signature" />
 
     <uses-permission android:name="studioidan.com.parsetest.permission.C2D_MESSAGE" />
-
+-->
     <application
         android:name="allgedera.com.allgederaapp.App"
         android:allowBackup="true"
@@ -74,7 +76,7 @@
                 <action android:name="com.google.android.c2dm.intent.REGISTRATION" />
 
                 <!-- IMPORTANT: Change "com.parse.tutorials.pushnotifications" to match your app's package name. -->
-                <category android:name="studioidan.com.parsetest" />
+                <category android:name="allgedera.com.allgederaapp" />
             </intent-filter>
         </receiver>
         <receiver
@@ -88,11 +90,10 @@
         </receiver>
 
         <activity
-            android:name="allgedera.com.allgederaapp.MainActivity"
+            android:name=".BusinessesOnMapActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.default" />
             </intent-filter>
         </activity>
@@ -101,10 +102,9 @@
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyBCmA_i2RV2lcKM0oBgn2j7jemBFUf9nwE" />
 
-        <activity android:name="allgedera.com.allgederaapp.MenuActivity">
+        <activity android:name=".fourBtnsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -127,7 +127,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="allgedera.com.allgederaapp.BuisnessesList" />
+        <activity android:name=".BusinessesListActivity" />
 
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     </application>
