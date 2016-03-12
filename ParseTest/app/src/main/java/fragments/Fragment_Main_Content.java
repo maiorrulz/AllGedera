@@ -27,7 +27,7 @@ import com.google.android.gms.maps.model.Polyline;
 import java.util.HashMap;
 import java.util.List;
 
-import entities.GenericEvent;
+import entities.Business;
 import allgedera.com.allgederaapp.R;
 
 /**
@@ -38,7 +38,7 @@ public class Fragment_Main_Content extends Fragment {
     public static GoogleMap map;
     public static Location myLocation = null;
     public static Polyline currentPath = null;
-     HashMap<Marker, GenericEvent> mapBusinesses = new HashMap<Marker, GenericEvent>();
+     HashMap<Marker, Business> mapBusinesses = new HashMap<Marker, Business>();
 
     @Nullable
     @Override
@@ -99,56 +99,13 @@ public class Fragment_Main_Content extends Fragment {
         }
     }
 
-    /*public void SetPlaces(List<Place> places) {
-        shown = Place.class.getSimpleName();
-        allPlaces = places;
+
+
+    public void SetGenericEvents(List<Business> genericEvents) {
+
         map.clear();
-        mapPlaces.clear();
-        map.setOnInfoWindowClickListener(onInfoWindowClickListenerPlace);
-        for (Place p : places) {
-            LatLng latLng = new LatLng(p.getLocation().getLatitude(), p.getLocation().getLongitude());
-            String name = p.getName();
-            String address = p.getAddress();
-            address += getActivity().getResources().getString(R.string.press_to_see_more);
-            MarkerOptions op = new MarkerOptions()
-                    .position(latLng)
-                    .title(name)
-                    .snippet(address);
-            //.icon(BitmapDescriptorFactory.fromResource(R.drawable.pin_place));
-            Marker m = map.addMarker(op);
-            mapPlaces.put(m, p);
-        }
-    }*/
-
-    /*public void SetWorks(List<Work> works) {
-        shown = Work.class.getSimpleName();
-        allWorks = works;
-        map.clear();
-        mapPlaces.clear();
-        map.setOnInfoWindowClickListener(onInfoWindowClickListenerWork);
-        for (Work w : works) {
-            LatLng latLng = new LatLng(w.getLocation().getLatitude(), w.getLocation().getLongitude());
-            String name = w.getName();
-            String address = w.getAddress();
-            MarkerOptions op = new MarkerOptions()
-                    .position(latLng)
-                    .title(name)
-                    .snippet(address + "\n" + getActivity().getResources().getString(R.string.press_to_see_more));
-            //.icon(BitmapDescriptorFactory.fromResource(R.drawable.img_pin))
-            Marker m = map.addMarker(op);
-            mapWorks.put(m, w);
-        }
-    }*/
-
-
-    public void SetGenericEvents(List<GenericEvent> genericEvents) {
-
-        //shown = GenericEvent.class.getSimpleName();
-        //allGenericEvents = genericEvents;
-        map.clear();
-        //mapPlaces.clear();
         map.setOnInfoWindowClickListener(onBusinessInfoWindowClickListener);
-        for (GenericEvent g : genericEvents) {
+        for (Business g : genericEvents) {
             LatLng latLng = new LatLng(g.getLocation().getLatitude(), g.getLocation().getLongitude());
             String name = g.getName();
             String address = g.getAddress();
@@ -195,7 +152,7 @@ public class Fragment_Main_Content extends Fragment {
 
             //  Log.i(tag, "info clicked");
             //
-            GenericEvent ge = mapBusinesses.get(marker);
+            Business ge = mapBusinesses.get(marker);
             FragmentDialogBusiness fragmentDialogBusiness = new FragmentDialogBusiness();
             Bundle bundle = new Bundle();
             bundle.putSerializable("genericEvent",ge);
@@ -223,8 +180,8 @@ public class Fragment_Main_Content extends Fragment {
                 //Work w = mapWorks.get(marker);
                 //tvName.setText(w.getName());
                 tvAddress.setText(w.getAddress());
-            } else if(shown.equals((GenericEvent.class.getSimpleName()))) {
-                GenericEvent ge = mapBusinesses.get(marker);
+            } else if(shown.equals((Business.class.getSimpleName()))) {
+                Business ge = mapBusinesses.get(marker);
                 tvName.setText(ge.getName());
                 tvAddress.setText(ge.getAddress());
             }

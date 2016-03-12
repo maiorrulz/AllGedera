@@ -19,7 +19,7 @@ import allgedera.com.allgederaapp.App;
 /**
  * Created by elash on 15/12/2015.
  */
-public class fakeEventsOrCoupons {
+public class BusinessManager {
 
     static int m_IsDataArrived = 0;
     static Event[] m_BusinessesList = null;
@@ -52,12 +52,12 @@ public class fakeEventsOrCoupons {
         }
     }
 
-    public static List<GenericEvent> getBusinesses() {
-        List<GenericEvent> toReturn = new ArrayList<GenericEvent>();
+    public static List<Business> getBusinesses() {
+        List<Business> toReturn = new ArrayList<Business>();
         if(m_BusinessesList != null) {
             for (int i = 0; i < m_BusinessesList.length; i++) {
                 Event _evt = m_BusinessesList[i];
-                GenericEvent _genEvt = new GenericEvent();
+                Business _genEvt = new Business();
                 _genEvt.setName(_evt.getName());
                 _genEvt.setAbout(_evt.getAbout());
                 _genEvt.setAddress(_evt.getAddress());

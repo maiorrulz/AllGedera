@@ -17,7 +17,7 @@
         android:onClick="openMap"/>
 
     <ListView
-        android:id="@+id/couponsListView"
+        android:id="@+id/BUSINESS_LIST_VIEW"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/button2" />

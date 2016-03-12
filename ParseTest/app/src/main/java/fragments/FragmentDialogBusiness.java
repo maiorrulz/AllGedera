@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.google.android.gms.maps.model.LatLng;
 import com.parse.ParseImageView;
 
-import entities.GenericEvent;
+import entities.Business;
 import navigation.DownloadTask;
 import allgedera.com.allgederaapp.R;
 
@@ -26,7 +26,7 @@ import static navigation.NavigationUtils.getDirectionsUrl;
 
 public class FragmentDialogBusiness extends DialogFragment implements View.OnClickListener {
 
-    GenericEvent ge;
+    Business ge;
     Button btnNav, btnShowWay, panView;
     ImageView imgExit;
 
@@ -34,7 +34,7 @@ public class FragmentDialogBusiness extends DialogFragment implements View.OnCli
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ge = (GenericEvent) getArguments().getSerializable("genericEvent");
+        ge = (Business) getArguments().getSerializable("genericEvent");
         //myLocation = (Location) getArguments().getSerializable("myLocation");
     }
 

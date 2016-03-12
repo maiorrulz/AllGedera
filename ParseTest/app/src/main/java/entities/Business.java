@@ -1,7 +1,6 @@
 package entities;
 
 import com.parse.ParseClassName;
-import com.parse.ParseFile;
 import com.parse.ParseGeoPoint;
 import com.parse.ParseObject;
 import java.io.Serializable;
@@ -9,8 +8,8 @@ import java.io.Serializable;
 /**
  * Created by elash on 14/12/2015.
  */
-@ParseClassName("GenericEvent")
-public class GenericEvent extends ParseObject implements Serializable{
+@ParseClassName("Business")
+public class Business extends ParseObject implements Serializable{
     public String getName(){return getString("name");};
     public void setName(String name){put("name",name);};
 

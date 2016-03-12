@@ -12,8 +12,8 @@ import android.widget.ListView;
 
 import java.util.List;
 
-import entities.GenericEvent;
-import entities.fakeEventsOrCoupons;
+import entities.Business;
+import entities.BusinessManager;
 
 public class BusinessesListActivity extends AppCompatActivity {
 
@@ -29,12 +29,12 @@ public class BusinessesListActivity extends AppCompatActivity {
     public class UpdateAsyncTask extends AsyncTask<Void, Void, Void> {
         Context m_cxt;
         ListAdapter listAdapter = null;
-        ListView couponsListView = null;
+        ListView businessListView = null;
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            couponsListView = (ListView) findViewById(R.id.couponsListView);
+            businessListView = (ListView) findViewById(R.id.BUSINESS_LIST_VIEW);
         }
 
         public  UpdateAsyncTask(Context cxt) {
@@ -44,35 +44,35 @@ public class BusinessesListActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... params)
         {
-            fakeEventsOrCoupons.loadBusinesses();
+            BusinessManager.loadBusinesses();
             waitUntilBusinessesLoaded();
-            List<GenericEvent> genericEvents=fakeEventsOrCoupons.getBusinesses();
+            List<Business> genericEvents= BusinessManager.getBusinesses();
             int numOfCoupons=genericEvents.size();
 
             Log.d("matan","numOfCoupons="+numOfCoupons);
 
-            String[] coupons=new String[numOfCoupons];
+            String[] businesses=new String[numOfCoupons];
             for(int i=0;i<numOfCoupons;i++){
-                GenericEvent ge = fakeEventsOrCoupons.getBusinesses().get(i);
-                coupons[i]=ge.getName() +
+                Business ge = BusinessManager.getBusinesses().get(i);
+                businesses[i]=ge.getName() +
                         "~"+ge.getAbout() +
                         "~"+ge.getImage();
             }
-            listAdapter = new CustomAdapter(m_cxt, coupons);
+            listAdapter = new CustomAdapter(m_cxt, businesses);
             return null;
         }
 
         @Override
         protected void onPostExecute( Void result ) {
             super.onPostExecute(result);
-            couponsListView.setAdapter(listAdapter);
+            businessListView.setAdapter(listAdapter);
         }
     }
 
 
     private void waitUntilBusinessesLoaded() {
         int k=0;
-        while ((!fakeEventsOrCoupons.existBusinesses())&&k<20)
+        while ((!BusinessManager.existBusinesses())&&k<20)
         try {
             k++;
             Thread.sleep(1000/k);

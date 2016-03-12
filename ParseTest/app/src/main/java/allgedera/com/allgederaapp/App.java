@@ -13,12 +13,11 @@ import com.parse.SaveCallback;
 import java.util.ArrayList;
 import java.util.List;
 
-import entities.GenericEvent;
-import entities.Msg;
-//import entities.Place;
+import entities.Business;
+
 
 public class App extends Application {
-    public static List<GenericEvent> genericEvents;
+    public static List<Business> genericEvents;
     public static List<String> cities;
     public  static Context g_context;
 
@@ -27,7 +26,7 @@ public class App extends Application {
         super.onCreate();
         init();
         Parse.enableLocalDatastore(this);
-        ParseObject.registerSubclass(GenericEvent.class);
+        ParseObject.registerSubclass(Business.class);
         // matan: from where we got this strings?
         Parse.initialize(this, "1gOrgDgD5Wk615TD4vsZBrzI4z5m3El7Ua84cHeX", "qtUAWSNq0fGxXh4N3jljU1RroYeuGb0MQLzCn30U");
 
@@ -50,6 +49,6 @@ public class App extends Application {
 
     private void init() {
         cities = new ArrayList<String>();
-        genericEvents = new ArrayList<GenericEvent>();
+        genericEvents = new ArrayList<Business>();
     }
 }

@@ -117,7 +117,7 @@ public class BusinessesOnMapActivity extends AppCompatActivity implements OnClic
             public void eventOccured(int id) {
                 if (id == 1) {
                     Toast.makeText(BusinessesOnMapActivity.this, "עסקים", Toast.LENGTH_SHORT).show();
-                    //fr_main_content.SetGenericEvents(App.genericEvents);
+                    //fr_main_content.SetGenericEvents(App.Business);
                     //fr_main_content.putBusinessesOnMap();
                 }
             }
