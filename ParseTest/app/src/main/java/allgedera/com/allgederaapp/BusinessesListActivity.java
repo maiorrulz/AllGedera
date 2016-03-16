@@ -5,17 +5,21 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import entities.Business;
 import entities.BusinessManager;
+import urlImages.ImageLoader;
 
 public class BusinessesListActivity extends AppCompatActivity {
+
+    private String strUrl = "https://upload.wikimedia.org/wikipedia/commons/4/4b/Everest_kalapatthar_crop.jpg";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,10 @@ public class BusinessesListActivity extends AppCompatActivity {
 
     }
 
+    public void onClick(View view) {
+        Toast aa = Toast.makeText(this.getBaseContext(), "aa", Toast.LENGTH_LONG);
+        aa.show();
+    }
 
     public class UpdateAsyncTask extends AsyncTask<Void, Void, Void> {
         Context m_cxt;
@@ -42,23 +50,19 @@ public class BusinessesListActivity extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(Void... params)
-        {
+        protected Void doInBackground(Void... params) {
             BusinessManager.loadBusinesses();
             waitUntilBusinessesLoaded();
-            List<Business> genericEvents= BusinessManager.getBusinesses();
-            int numOfCoupons=genericEvents.size();
-
-            Log.d("matan","numOfCoupons="+numOfCoupons);
-
+            List<Business> businessList= BusinessManager.getBusinesses();
+            int numOfCoupons=businessList.size();
             String[] businesses=new String[numOfCoupons];
             for(int i=0;i<numOfCoupons;i++){
-                Business ge = BusinessManager.getBusinesses().get(i);
-                businesses[i]=ge.getName() +
-                        "~"+ge.getAbout() +
-                        "~"+ge.getImage();
+                Business business = BusinessManager.getBusinesses().get(i);
+                businesses[i]=business.getName() +
+                        "~"+business.getAbout() +
+                        "~"+business.getImage();
             }
-            listAdapter = new CustomAdapter(m_cxt, businesses);
+            listAdapter = new BusinessAdapter(m_cxt, businesses);
             return null;
         }
 

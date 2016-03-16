@@ -49,17 +49,6 @@ public class Fragment_Main_Content extends Fragment {
         map.setMyLocationEnabled(true);
         map.getUiSettings().setZoomControlsEnabled(false);
         goToMyLocation();
-        /*map.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                marker.showInfoWindow();
-                map.moveCamera(CameraUpdateFactory.newLatLng(marker.getPosition()));
-                map.animateCamera(CameraUpdateFactory.zoomTo(14));
-                Log.d("", "in marker click listener");
-                Log.i("", "in marker Click listener");
-                return true;
-            }
-        });*/
         return v;
     }
 
