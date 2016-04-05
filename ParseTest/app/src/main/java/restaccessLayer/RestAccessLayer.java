@@ -60,4 +60,20 @@ public class RestAccessLayer /*implements Response.Listener<Event[]>, Response.E
         rQueue.add(jsonRequest);
     }
 
+    public void runJsonRequestGetCoupons(final RestCallback.OnResponseSuccess ors, final RestCallback.OnResponseFailure orf) throws IOException {
+        String url = Constants.url;
+        final Request jsonRequest = new GsonRequest<> (url, Coupon[].class, new Response.Listener<Coupon[]>(){
+            @Override
+            public void onResponse(Coupon[] response) {
+                ors.onSuccess(response);
+            }
+        }, new Response.ErrorListener(){
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                orf.onFailure(error);
+            }
+        });
+        rQueue.add(jsonRequest);
+    }
+
 }
