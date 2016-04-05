@@ -19,9 +19,9 @@ public class Coupon
 
     public String phone;
 
-    public double x_location;
+    public Double x_location;
 
-    public double y_location;
+    public Double y_location;
 
     public String image;
 
@@ -90,22 +90,22 @@ public class Coupon
         this.phone = phone;
     }
 
-    public double getX_location()
+    public Double getX_location()
     {
         return this.x_location;
     }
 
-    public void setX_location(double x_location)
+    public void setX_location(Double x_location)
     {
         this.x_location = x_location;
     }
 
-    public double getY_location()
+    public Double getY_location()
     {
         return this.y_location;
     }
 
-    public void setY_location(double y_location)
+    public void setY_location(Double y_location)
     {
         this.y_location = y_location;
     }
